@@ -8,7 +8,7 @@
 
 ## Sample
 
-![sample.gif](/screenshots/sample.gif "sample.gif")
+<img src="/screenshots/sample.gif" alt="sample" title="sample" width="400" height="680" />
 
 
 
@@ -93,7 +93,7 @@ Do what you what :)
 
 ## Demo
 
-[Download]()
+[Download](https://github.com/tangqi92/WaveLoadingView/releases/download/v0.1.2/sample-release-unsigned.apk)
 
 
 
