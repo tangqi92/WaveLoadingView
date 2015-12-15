@@ -1,5 +1,6 @@
 # WaveLoadingView
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-WaveLoadingView-green.svg?style=true)](https://android-arsenal.com/details/1/2908)
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)  
 
 **WaveLoadingView** - An Android library providing to realize wave loading effect.
@@ -114,7 +115,7 @@ Inspired by
 
 ## Contact Me
 
-Born in 1992, now a student of Southeast University, master of software engineerin. Loving technology, programming, reading and sports.
+Born in 1992, now a student of Southeast University, master of Software Engineering. Loving technology, programming, reading and sports.
 
 I will graduate in June 2017, expect the internship or full-time job in Android or iOS.
 
@@ -124,9 +125,7 @@ If you have any questions or want to make friends with me, please feel free to c
 
 ## License
 
-<pre>
-
- Copyright 2014 Qi Tang
+    Copyright 2014 Qi Tang
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -140,4 +139,3 @@ If you have any questions or want to make friends with me, please feel free to c
 	See the License for the specific language governing permissions and
 	limitations under the License.
 
-</pre>
