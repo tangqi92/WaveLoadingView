@@ -1,0 +1,240 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <me.itangqi.waveloadingview.WaveLoadingView
+            android:id="@+id/waveLoadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:borderWidth="3"
+            app:borderColor="@color/colorAccent"
+            app:progressValue="40"
+            app:shapeType="circle"
+            app:waveColor="@color/colorAccent"
+            app:waveAmplitude="50"
+            app:titleTop="Top Title"
+            app:titleTopColor="@color/colorPrimaryText"
+            app:titleTopSize="20"
+            app:titleCenter="Center Title"
+            app:titleCenterColor="@color/colorPrimaryText"
+            app:titleCenterSize="24"
+            app:titleBottom="Bottom Title"
+            app:titleBottomColor="@color/colorPrimaryText"
+            app:titleBottomSize="20"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_shape_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:gravity="center_vertical"
+                    android:text="Shape Type:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_shape_type"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/tv_shape_type"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_shape_circle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="Circle"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_shape_square"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Square"/>
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/tv_shape_type"
+                    android:gravity="center_vertical"
+                    android:text="Title:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_title"
+                    android:layout_below="@+id/rg_shape"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/tv_title"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cb_title_top"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="Top"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_title_center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Center"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_title_bottom"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Bottom"/>
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/tv_title"
+                    android:gravity="center_vertical"
+                    android:text="Progress:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                    android:id="@+id/seekbar_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_progress"
+                    android:layout_below="@+id/ll_title"
+                    android:layout_toRightOf="@id/tv_progress"
+                    app:dsb_indicatorColor="@color/colorPrimary"
+                    app:dsb_max="100"
+                    app:dsb_min="0"
+                    app:dsb_progressColor="@color/colorPrimary"
+                    app:dsb_value="80"/>
+
+                <TextView
+                    android:id="@+id/border_width"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/tv_progress"
+                    android:gravity="center_vertical"
+                    android:text="Board Width:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                    android:id="@+id/seekbar_border_width"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/border_width"
+                    android:layout_below="@+id/seekbar_progress"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/border_width"
+                    app:dsb_indicatorColor="@color/colorPrimary"
+                    app:dsb_max="100"
+                    app:dsb_min="0"
+                    app:dsb_progressColor="@color/colorPrimary"
+                    app:dsb_value="10"/>
+
+                <TextView
+                    android:id="@+id/tv_amplitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/border_width"
+                    android:gravity="center_vertical"
+                    android:text="Amplitude:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                    android:id="@+id/seek_bar_amplitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_amplitude"
+                    android:layout_below="@+id/seekbar_border_width"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/tv_amplitude"
+                    app:dsb_indicatorColor="@color/colorPrimary"
+                    app:dsb_max="100"
+                    app:dsb_min="1"
+                    app:dsb_progressColor="@color/colorPrimary"
+                    app:dsb_value="50"/>
+
+                <TextView
+                    android:id="@+id/tv_wave_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/tv_amplitude"
+                    android:gravity="center_vertical"
+                    android:text="Wave Color:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
+                    android:id="@+id/shadeslider_wave_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_wave_color"
+                    android:layout_below="@+id/seek_bar_amplitude"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/tv_wave_color"/>
+
+                <TextView
+                    android:id="@+id/tv_border_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/tv_wave_color"
+                    android:gravity="center_vertical"
+                    android:text="Board Color:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
+                    android:id="@+id/shadeslider_border_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_border_color"
+                    android:layout_below="@+id/shadeslider_wave_color"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/tv_border_color"/>
+
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
