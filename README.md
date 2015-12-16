@@ -17,7 +17,7 @@
 
 **For a working implementation of this project see the `sample/` folder.**
 
-### Setp 1
+### Step 1
 
 Include the library as local library project or add the dependency in your build.gradle.
 
