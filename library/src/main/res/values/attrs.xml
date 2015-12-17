@@ -2,18 +2,18 @@
 <resources>
 
     <declare-styleable name="WaveLoadingView">
-        <attr name="mlv_borderWidth" format="integer"/>
+        <attr name="mlv_borderWidth" format="dimension"/>
         <attr name="mlv_borderColor" format="color"/>
         <attr name="mlv_progressValue" format="integer"/>
-        <attr name="mlv_shapeType">
-            <flag name="circle" value="0" />
-            <flag name="square" value="1" />
+        <attr name="mlv_shapeType" format="enum">
+            <enum name="circle" value="0" />
+            <enum name="square" value="1" />
         </attr>
         <attr name="mlv_waveColor" format="color"/>
         <attr name="mlv_waveAmplitude" format="float"/>
-        <attr name="mlv_titleTopSize" format="float"/>
-        <attr name="mlv_titleCenterSize" format="float"/>
-        <attr name="mlv_titleBottomSize" format="float"/>
+        <attr name="mlv_titleTopSize" format="dimension"/>
+        <attr name="mlv_titleCenterSize" format="dimension"/>
+        <attr name="mlv_titleBottomSize" format="dimension"/>
         <attr name="mlv_titleTopColor" format="color"/>
         <attr name="mlv_titleCenterColor" format="color"/>
         <attr name="mlv_titleBottomColor" format="color"/>

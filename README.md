@@ -23,9 +23,15 @@ Include the library as local library project or add the dependency in your build
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.1.3'
+    compile 'me.itangqi.waveloadingview:library:0.1.4'
+    // I have uploaded v0.1.4 on 2015-12-17, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.1.2. 
 }
 ```	
+Or
+
+Import the library, then add it to your /settings.gradle and /app/build.gradle, if you don't know how to do it, you can read my blog for help.
+
 ### Step 2
 
 Include the WaveLoadingView widget in your layout. And you can customize it like this.
@@ -35,21 +41,21 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
     android:id="@+id/waveLoadingView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:mlv_borderWidth="3"
     app:mlv_borderColor="@color/colorAccent"
+    app:mlv_borderWidth="3dp"
     app:mlv_progressValue="40"
-    app:mlv_shapeType="circle"
-    app:mlv_waveColor="@color/colorAccent"
-    app:mlv_waveAmplitude="50"
-    app:mlv_titleTop="Top Title"
-    app:mlv_titleTopColor="@color/colorPrimaryText"
-    app:mlv_titleTopSize="20"
-    app:mlv_titleCenter="Center Title"
-    app:mlv_titleCenterColor="@color/colorPrimaryText"
-    app:mlv_titleCenterSize="24"
+    app:mlv_shapeType="square"
     app:mlv_titleBottom="Bottom Title"
     app:mlv_titleBottomColor="@color/colorPrimaryText"
-    app:mlv_titleBottomSize="20"/>      
+    app:mlv_titleBottomSize="20sp"
+    app:mlv_titleCenter="Center Title"
+    app:mlv_titleCenterColor="@color/colorPrimaryText"
+    app:mlv_titleCenterSize="24sp"
+    app:mlv_titleTop="Top Title"
+    app:mlv_titleTopColor="@color/colorPrimaryText"
+    app:mlv_titleTopSize="20sp"
+    app:mlv_waveAmplitude="60"
+    app:mlv_waveColor="@color/colorAccent"/>     
 ```
 
 ### Step 3
@@ -74,15 +80,15 @@ WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadi
 
 Do what you what :)
 
-* `app:mlv_borderWidth` (integer) Default to be 0
+* `app:mlv_borderWidth` (dimension) Default to be 0
 * `app:mlv_borderColor` (color)
 * `app:mlv_progressValue` (integer) Set ProgressValue
-* `app:mlv_shapeType` (circle/square) Default to be circle
+* `app:mlv_shapeType` (enum) Default to be circle
 * `app:mlv_waveColor` (color)
-* `app:mlv_waveAmplitude` (integer) Set Wave Amplitude (between 1 and 100)
-* `app:mlv_titleTopSize` (float) 
-* `app:mlv_titleCenterSize` (float)
-* `app:mlv_titleBottomSize` (float)
+* `app:mlv_waveAmplitude` (float) Set Wave Amplitude (between 1 and 100)
+* `app:mlv_titleTopSize` (dimension) 
+* `app:mlv_titleCenterSize` (dimension)
+* `app:mlv_titleBottomSize` (dimension)
 * `app:mlv_titleTopColor` (color)
 * `app:mlv_titleCenterColor` (color)
 * `app:mlv_titleBottomColor` (color)
@@ -95,9 +101,14 @@ Do what you what :)
 
 ## ChangeLog
 
+### 0.1.4
+
+- Fix the bug which `setProgressValue() doesn't change the value of mProgressValue`
+- Fix attributes' setters
+
 ### 0.1.3
 
-- Fix the bug of `Attribute "borderWidth" has already been defined`
+- Fix the bug which `Attribute "borderWidth" has already been defined`
 - Prefix the attributes with "wlv"
 
 

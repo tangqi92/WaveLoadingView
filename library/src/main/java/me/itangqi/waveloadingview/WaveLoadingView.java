@@ -43,7 +43,7 @@ public class WaveLoadingView extends View {
     private static final int DEFAULT_WAVE_PROGRESS_VALUE = 50;
     private static final int DEFAULT_WAVE_COLOR = Color.parseColor("#212121");
     private static final int DEFAULT_TITLE_COLOR = Color.parseColor("#212121");
-    private static final int DEFAULT_BORDER_WIDTH = 0;
+    private static final float DEFAULT_BORDER_WIDTH = 0;
     // This is incorrect/not recommended by Joshua Bloch in his book Effective Java (2nd ed).
     private static final int DEFAULT_WAVE_SHAPE = ShapeType.CIRCLE.ordinal();
     private static final float DEFAULT_TITLE_TOP_SIZE = 18.0f;
@@ -59,12 +59,12 @@ public class WaveLoadingView extends View {
     private int mCanvasSize;
     private float mAmplitudeRatio;
     private int mWaveColor;
+    private int mShapeType;
 
     // Properties.
     private String mTopTitle;
     private String mCenterTitle;
     private String mBottomTitle;
-    private int mShapeType;
     private float mDefaultWaterLevel;
     private float mWaterLevelRatio = 1f;
     private float mWaveShiftRatio = DEFAULT_WAVE_SHIFT_RATIO;
@@ -87,7 +87,9 @@ public class WaveLoadingView extends View {
     // Animation.
     private AnimatorSet mAnimatorSet;
 
-    //region Constructor & Init Method.
+    private Context mContext;
+
+    // Constructor & Init Method.
     public WaveLoadingView(final Context context) {
         this(context, null);
     }
@@ -102,6 +104,7 @@ public class WaveLoadingView extends View {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+        mContext = context;
         // Init Wave.
         mShaderMatrix = new Matrix();
         mWavePaint = new Paint();
@@ -133,7 +136,7 @@ public class WaveLoadingView extends View {
         mBorderPaint = new Paint();
         mBorderPaint.setAntiAlias(true);
         mBorderPaint.setStyle(Paint.Style.STROKE);
-        mBorderPaint.setStrokeWidth(attributes.getInteger(R.styleable.WaveLoadingView_mlv_borderWidth, DEFAULT_BORDER_WIDTH));
+        mBorderPaint.setStrokeWidth(attributes.getDimension(R.styleable.WaveLoadingView_mlv_borderWidth, dp2px(DEFAULT_BORDER_WIDTH)));
         mBorderPaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_borderColor, DEFAULT_WAVE_COLOR));
 
         // Init Title
@@ -141,21 +144,21 @@ public class WaveLoadingView extends View {
         mTopTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_titleTopColor, DEFAULT_TITLE_COLOR));
         mTopTitlePaint.setStyle(Paint.Style.FILL);
         mTopTitlePaint.setAntiAlias(true);
-        mTopTitlePaint.setTextSize(sp2px(attributes.getFloat(R.styleable.WaveLoadingView_mlv_titleTopSize, DEFAULT_TITLE_TOP_SIZE)));
+        mTopTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_mlv_titleTopSize, sp2px(DEFAULT_TITLE_TOP_SIZE)));
         mTopTitle = attributes.getString(R.styleable.WaveLoadingView_mlv_titleTop);
 
         mCenterTitlePaint = new Paint();
         mCenterTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_titleCenterColor, DEFAULT_TITLE_COLOR));
         mCenterTitlePaint.setStyle(Paint.Style.FILL);
         mCenterTitlePaint.setAntiAlias(true);
-        mCenterTitlePaint.setTextSize(sp2px(attributes.getFloat(R.styleable.WaveLoadingView_mlv_titleCenterSize, DEFAULT_TITLE_CENTER_SIZE)));
+        mCenterTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_mlv_titleCenterSize, sp2px(DEFAULT_TITLE_CENTER_SIZE)));
         mCenterTitle = attributes.getString(R.styleable.WaveLoadingView_mlv_titleCenter);
 
         mBottomTitlePaint = new Paint();
         mBottomTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_titleBottomColor, DEFAULT_TITLE_COLOR));
         mBottomTitlePaint.setStyle(Paint.Style.FILL);
         mBottomTitlePaint.setAntiAlias(true);
-        mBottomTitlePaint.setTextSize(sp2px(attributes.getFloat(R.styleable.WaveLoadingView_mlv_titleBottomSize, DEFAULT_TITLE_BOTTOM_SIZE)));
+        mBottomTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_mlv_titleBottomSize, sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
         mBottomTitle = attributes.getString(R.styleable.WaveLoadingView_mlv_titleBottom);
     }
 
@@ -228,7 +231,7 @@ public class WaveLoadingView extends View {
             if (!TextUtils.isEmpty(mBottomTitle)) {
                 float bottom = mBottomTitlePaint.measureText(mBottomTitle);
                 canvas.drawText(mBottomTitle, (getWidth() - bottom) / 2,
-                        getHeight() * 8 / 10.0f -  ((mBottomTitlePaint.descent() + mBottomTitlePaint.ascent()) / 2), mBottomTitlePaint);
+                        getHeight() * 8 / 10.0f - ((mBottomTitlePaint.descent() + mBottomTitlePaint.ascent()) / 2), mBottomTitlePaint);
             }
         } else {
             mWavePaint.setShader(null);
@@ -329,16 +332,15 @@ public class WaveLoadingView extends View {
     }
 
     public void setWaveColor(int color) {
-        this.mWaveColor = color;
+        mWaveColor = color;
         // Need to recreate shader when color changed ?
 //        mWaveShader = null;
         updateWaveShader();
         invalidate();
     }
 
-    public String getWaveColor() {
-        String waveColor = String.format("#%06X", (0xFFFFFF & mWaveColor));
-        return waveColor;
+    public int getWaveColor() {
+        return mWaveColor;
     }
 
     public void setBorderWidth(float width) {
@@ -356,9 +358,8 @@ public class WaveLoadingView extends View {
         invalidate();
     }
 
-    public String getBorderColor() {
-        String borderColor =  String.format("#%06X", (0xFFFFFF & mBorderPaint.getColor()));
-        return borderColor;
+    public int getBorderColor() {
+        return mBorderPaint.getColor();
     }
 
     public void setShapeType(ShapeType shapeType) {
@@ -392,7 +393,7 @@ public class WaveLoadingView extends View {
      * @param progress Default to be 50.
      */
     public void setProgressValue(int progress) {
-        this.mProgressValue = progress;
+        mProgressValue = progress;
         ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(this, "waterLevelRatio", mWaterLevelRatio, 1f - ((float) progress / 100));
         waterLevelAnim.setDuration(1000);
         waterLevelAnim.setInterpolator(new DecelerateInterpolator());
@@ -429,6 +430,7 @@ public class WaveLoadingView extends View {
 
     /**
      * Set the title within the WaveView.
+     *
      * @param topTitle Default to be null.
      */
     public void setTopTitle(String topTitle) {
@@ -556,11 +558,18 @@ public class WaveLoadingView extends View {
 
     /**
      * Paint.setTextSize(float textSize) default unit is px.
+     *
      * @param spValue The real size of text
      * @return int - A transplanted sp
      */
     public int sp2px(float spValue) {
-        final float fontScale = getContext().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = mContext.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
+
+    protected int dp2px(float dp) {
+        final float scale = mContext.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
 }
