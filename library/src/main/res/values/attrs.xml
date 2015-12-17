@@ -2,24 +2,24 @@
 <resources>
 
     <declare-styleable name="WaveLoadingView">
-        <attr name="borderWidth" format="integer"/>
-        <attr name="borderColor" format="color"/>
-        <attr name="progressValue" format="integer"/>
-        <attr name="shapeType">
+        <attr name="mlv_borderWidth" format="integer"/>
+        <attr name="mlv_borderColor" format="color"/>
+        <attr name="mlv_progressValue" format="integer"/>
+        <attr name="mlv_shapeType">
             <flag name="circle" value="0" />
             <flag name="square" value="1" />
         </attr>
-        <attr name="waveColor" format="color"/>
-        <attr name="waveAmplitude" format="float"/>
-        <attr name="titleTopSize" format="float"/>
-        <attr name="titleCenterSize" format="float"/>
-        <attr name="titleBottomSize" format="float"/>
-        <attr name="titleTopColor" format="color"/>
-        <attr name="titleCenterColor" format="color"/>
-        <attr name="titleBottomColor" format="color"/>
-        <attr name="titleTop" format="string"/>
-        <attr name="titleCenter" format="string"/>
-        <attr name="titleBottom" format="string"/>
+        <attr name="mlv_waveColor" format="color"/>
+        <attr name="mlv_waveAmplitude" format="float"/>
+        <attr name="mlv_titleTopSize" format="float"/>
+        <attr name="mlv_titleCenterSize" format="float"/>
+        <attr name="mlv_titleBottomSize" format="float"/>
+        <attr name="mlv_titleTopColor" format="color"/>
+        <attr name="mlv_titleCenterColor" format="color"/>
+        <attr name="mlv_titleBottomColor" format="color"/>
+        <attr name="mlv_titleTop" format="string"/>
+        <attr name="mlv_titleCenter" format="string"/>
+        <attr name="mlv_titleBottom" format="string"/>
     </declare-styleable>
 
 </resources>

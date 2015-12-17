@@ -17,13 +17,13 @@
 
 **For a working implementation of this project see the `sample/` folder.**
 
-### Setp 1
+### Step 1
 
 Include the library as local library project or add the dependency in your build.gradle.
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.1.2'
+    compile 'me.itangqi.waveloadingview:library:0.1.3'
 }
 ```	
 ### Step 2
@@ -32,24 +32,24 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
    
 ```xml
 <me.itangqi.waveloadingview.WaveLoadingView
-        android:id="@+id/waveLoadingView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:borderWidth="3"
-        app:borderColor="@color/colorAccent"
-        app:progressValue="40"
-        app:shapeType="circle"
-        app:waveColor="@color/colorAccent"
-        app:waveAmplitude="50"
-        app:titleTop="Top Title"
-        app:titleTopColor="@color/colorPrimaryText"
-        app:titleTopSize="20"
-        app:titleCenter="Center Title"
-        app:titleCenterColor="@color/colorPrimaryText"
-        app:titleCenterSize="24"
-        app:titleBottom="Bottom Title"
-        app:titleBottomColor="@color/colorPrimaryText"
-        app:titleBottomSize="20"         
+    android:id="@+id/waveLoadingView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:mlv_borderWidth="3"
+    app:mlv_borderColor="@color/colorAccent"
+    app:mlv_progressValue="40"
+    app:mlv_shapeType="circle"
+    app:mlv_waveColor="@color/colorAccent"
+    app:mlv_waveAmplitude="50"
+    app:mlv_titleTop="Top Title"
+    app:mlv_titleTopColor="@color/colorPrimaryText"
+    app:mlv_titleTopSize="20"
+    app:mlv_titleCenter="Center Title"
+    app:mlv_titleCenterColor="@color/colorPrimaryText"
+    app:mlv_titleCenterSize="24"
+    app:mlv_titleBottom="Bottom Title"
+    app:mlv_titleBottomColor="@color/colorPrimaryText"
+    app:mlv_titleBottomSize="20"/>      
 ```
 
 ### Step 3
@@ -74,23 +74,33 @@ WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadi
 
 Do what you what :)
 
-* `app:borderWidth` (integer) Default to be 0
-* `app:borderColor` (color)
-* `app:progressValue` (integer) Set ProgressValue
-* `app:shapeType` (circle/square) Default to be circle
-* `app:waveColor` (color)
-* `app:waveAmplitude` (integer) Set Wave Amplitude (between 1 and 100)
-* `app:titleTopSize` (float) 
-* `app:titleCenterSize` (float)
-* `app:titleBottomSize` (float)
-* `app:titleTopColor` (color)
-* `app:titleCenterColor` (color)
-* `app:titleBottomColor` (color)
-* `app:titleTop` (string) default to be ""
-* `app:titleCenter` (string)
-* `app:titleBottom ` (string)
+* `app:mlv_borderWidth` (integer) Default to be 0
+* `app:mlv_borderColor` (color)
+* `app:mlv_progressValue` (integer) Set ProgressValue
+* `app:mlv_shapeType` (circle/square) Default to be circle
+* `app:mlv_waveColor` (color)
+* `app:mlv_waveAmplitude` (integer) Set Wave Amplitude (between 1 and 100)
+* `app:mlv_titleTopSize` (float) 
+* `app:mlv_titleCenterSize` (float)
+* `app:mlv_titleBottomSize` (float)
+* `app:mlv_titleTopColor` (color)
+* `app:mlv_titleCenterColor` (color)
+* `app:mlv_titleBottomColor` (color)
+* `app:mlv_titleTop` (string) default to be ""
+* `app:mlv_titleCenter` (string)
+* `app:mlv_titleBottom ` (string)
 
 **All attributes have their respective getters and setters to change them at runtime.**
+
+
+## ChangeLog
+
+### 0.1.3
+
+- Fix the bug of `Attribute "borderWidth" has already been defined`
+- Prefix the attributes with "wlv"
+
+
 
 ## Demo
 
