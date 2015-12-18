@@ -69,7 +69,7 @@ WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadi
 	mWaveLoadingView.setTopTitle("Top Title");
 	mWaveLoadingView.setCenterTitleColor(Color.GRAY);
 	mWaveLoadingView.setBottomTitleSize(18);
-	mWaveLoadingView.setProgress(80);
+	mWaveLoadingView.setProgressValue(80);
 	mWaveLoadingView.setBorderWidth(10);
 	mWaveLoadingView.setAmplitudeRatio(60);
 	mWaveLoadingView.setWaveColor(Color.GRAY);
