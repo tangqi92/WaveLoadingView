@@ -55,7 +55,7 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
     app:mlv_titleTopColor="@color/colorPrimaryText"
     app:mlv_titleTopSize="20sp"
     app:mlv_waveAmplitude="60"
-    app:mlv_waveColor="@color/colorAccent"/>     
+    app:mlv_waveColor="@color/colorAccent"/>        
 ```
 
 ### Step 3
@@ -80,21 +80,23 @@ WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadi
 
 Do what you what :)
 
-* `app:mlv_borderWidth` (dimension) Default to be 0
-* `app:mlv_borderColor` (color)
-* `app:mlv_progressValue` (integer) Set ProgressValue
-* `app:mlv_shapeType` (enum) Default to be circle
-* `app:mlv_waveColor` (color)
-* `app:mlv_waveAmplitude` (float) Set Wave Amplitude (between 1 and 100)
-* `app:mlv_titleTopSize` (dimension) 
-* `app:mlv_titleCenterSize` (dimension)
-* `app:mlv_titleBottomSize` (dimension)
-* `app:mlv_titleTopColor` (color)
-* `app:mlv_titleCenterColor` (color)
-* `app:mlv_titleBottomColor` (color)
-* `app:mlv_titleTop` (string) default to be ""
-* `app:mlv_titleCenter` (string)
-* `app:mlv_titleBottom ` (string)
+|name|format|description|
+|:---:|:---:|:---:|
+| mlv_borderWidth | dimension |set border width, default to be 0
+| mlv_borderColor | color |set border color
+| mlv_progressValue | integer |set progress value, default to be 50
+| mlv_shapeType | enum |set shape type, default to be circle
+| mlv_waveColor | color |set wave color
+| mlv_waveAmplitude | float |set wave amplitude
+| mlv_titleTopSize | dimension |set top title size, default to be 18 
+| mlv_titleCenterSize | dimension |set center title size, default to be 22
+| mlv_titleBottomSize | dimension |set bottom size, default to be 18
+| mlv_titleTopColor| color |set top title color
+| mlv_titleCenterColor | color |set center title color 
+| mlv_titleBottomColor | color |set bottom title color 
+| mlv_titleTop | string |set top title content, default to be null
+| mlv_titleCenter | string |set center title content, default to be null
+| mlv_titleBottom | string |set bottom title content, default to be null
 
 **All attributes have their respective getters and setters to change them at runtime.**
 
@@ -146,7 +148,7 @@ If you have any questions or want to make friends with me, please feel free to c
 
 ## License
 
-    Copyright 2014 Qi Tang
+    Copyright 2015 Qi Tang
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
