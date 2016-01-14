@@ -3,7 +3,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-WaveLoadingView-green.svg?style=true)](https://android-arsenal.com/details/1/2908)
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)  
 
-**WaveLoadingView** - An Android library providing to realize wave loading effect.
+**WaveLoadingView** - An Android library that provides a realistic wave-loading effect.
 
 <img src="/screenshots/ss.png" alt="screenshot" title="screenshot" width="400" height="450" /> 
 
@@ -19,7 +19,7 @@
 
 ### Step 1
 
-Include the library as local library project or add the dependency in your build.gradle.
+Include the library as a local library project or add the dependency in your build.gradle.
 
 ```groovy
 dependencies {
@@ -30,7 +30,7 @@ dependencies {
 ```	
 Or
 
-Import the library, then add it to your /settings.gradle and /app/build.gradle, if you don't know how to do it, you can read my blog for help.
+Import the library, then add it to your /settings.gradle and /app/build.gradle. If you don't know how to do this, you can read my blog for help.
 
 ### Step 2
 
@@ -60,7 +60,7 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
 
 ### Step 3
 
-Absolutely，you can write some animation codes to the callbacks such as setOnCheckedChangeListener, onProgressChanged, etc in your Activity.
+You can write some animation codes to the callbacks such as setOnCheckedChangeListener, onProgressChanged, etc in your Activity.
 
 
 ```java
@@ -82,21 +82,21 @@ Do what you what :)
 
 |name|format|description|
 |:---:|:---:|:---:|
-| mlv_borderWidth | dimension |set border width, default to be 0
+| mlv_borderWidth | dimension |set border width, default is 0
 | mlv_borderColor | color |set border color
-| mlv_progressValue | integer |set progress value, default to be 50
-| mlv_shapeType | enum |set shape type, default to be circle
+| mlv_progressValue | integer |set progress value, default is 50
+| mlv_shapeType | enum |set shape type, default is circle
 | mlv_waveColor | color |set wave color
 | mlv_waveAmplitude | float |set wave amplitude
-| mlv_titleTopSize | dimension |set top title size, default to be 18 
-| mlv_titleCenterSize | dimension |set center title size, default to be 22
-| mlv_titleBottomSize | dimension |set bottom size, default to be 18
+| mlv_titleTopSize | dimension |set top title size, default is 18 
+| mlv_titleCenterSize | dimension |set center title size, default is 22
+| mlv_titleBottomSize | dimension |set bottom size, default is 18
 | mlv_titleTopColor| color |set top title color
 | mlv_titleCenterColor | color |set center title color 
 | mlv_titleBottomColor | color |set bottom title color 
-| mlv_titleTop | string |set top title content, default to be null
-| mlv_titleCenter | string |set center title content, default to be null
-| mlv_titleBottom | string |set bottom title content, default to be null
+| mlv_titleTop | string |set top title content, default is null
+| mlv_titleCenter | string |set center title content, default is null
+| mlv_titleBottom | string |set bottom title content, default is null
 
 **All attributes have their respective getters and setters to change them at runtime.**
 
