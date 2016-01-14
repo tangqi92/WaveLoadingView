@@ -5,7 +5,7 @@
 
 **WaveLoadingView** - An Android library providing to realize wave loading effect.
 
-<img src="/screenshots/ss.png" alt="screenshot" title="screenshot" width="450" height="495" /> 
+<img src="/screenshots/ss.png" alt="screenshot" title="screenshot" width="400" height="450" /> 
 
 ## Sample
 
@@ -23,9 +23,9 @@ Include the library as local library project or add the dependency in your build
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.1.4'
-    // I have uploaded v0.1.4 on 2015-12-17, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.1.2. 
+    compile 'me.itangqi.waveloadingview:library:0.1.5'
+    // I have uploaded v0.1.5 on 2016-01-14, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.1.4. 
 }
 ```	
 Or
@@ -101,16 +101,30 @@ Do what you what :)
 **All attributes have their respective getters and setters to change them at runtime.**
 
 
-## ChangeLog
+## Change Log
 
-### 0.1.4
+### 0.1.5 (2016-01-14)
 
-- Fix the bug which `setProgressValue() doesn't change the value of mProgressValue`
-- Fix attributes' setters
+#### Fixed bugs:
+
+- IllegalArgumentException: width and height must be > 0 while loading Bitmap from View [#6](https://github.com/tangqi92/WaveLoadingView/issues/6)
+
+### 0.1.4 (2015-12-17)
+
+#### Fixed bugs:
+
+- setProgressValue() doesn't change the value of mProgressValue [#4](https://github.com/tangqi92/WaveLoadingView/issues/4)
+
 
 ### 0.1.3
 
-- Fix the bug which `Attribute "borderWidth" has already been defined`
+#### Fixed bugs:
+
+
+- Attribute "borderWidth" has already been defined [#2](https://github.com/tangqi92/WaveLoadingView/issues/2)
+
+#### Implemented enhancements:
+
 - Prefix the attributes with "wlv"
 
 
@@ -128,13 +142,13 @@ Looking for contributors, feel free to fork !
 Tell me if you're using my library in your application, I'll share it in this README.
 
 
-
 ## Thanks
 
 Inspired by 
 
 - [WaveView](https://github.com/gelitenight/WaveView) created by [gelitenight](https://github.com/gelitenight)
 - [CircularFillableLoaders](https://github.com/lopspower/CircularFillableLoaders) created by [lopspower](https://github.com/lopspower)
+
 
 ## Contact Me
 
@@ -145,10 +159,9 @@ I will graduate in June 2017, expect the internship or full-time job in Android 
 If you have any questions or want to make friends with me, please feel free to contact me : [imtangqi#gmail.com](mailto:imtangqi@gmail.com "Welcome to contact me")
 
 
-
 ## License
 
-    Copyright 2015 Qi Tang
+    Copyright 2016 Qi Tang
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.

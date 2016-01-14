@@ -73,6 +73,7 @@ public class WaveLoadingView extends View {
     // Object used to draw.
     // Shader containing repeated waves.
     private BitmapShader mWaveShader;
+    private Bitmap bitmapBuffer;
     // Shader matrix.
     private Matrix mShaderMatrix;
     // Paint to draw wave.
@@ -247,44 +248,58 @@ public class WaveLoadingView extends View {
         updateWaveShader();
     }
 
-
     private void updateWaveShader() {
-        double defaultAngularFrequency = 2.0f * Math.PI / DEFAULT_WAVE_LENGTH_RATIO / getWidth();
-        float defaultAmplitude = getHeight() * DEFAULT_AMPLITUDE_RATIO;
-        mDefaultWaterLevel = getHeight() * DEFAULT_WATER_LEVEL_RATIO;
-        float defaultWaveLength = getWidth();
+        // IllegalArgumentException: width and height must be > 0 while loading Bitmap from View
+        // http://stackoverflow.com/questions/17605662/illegalargumentexception-width-and-height-must-be-0-while-loading-bitmap-from
+        if (bitmapBuffer == null || haveBoundsChanged()) {
+            if(bitmapBuffer != null)
+                bitmapBuffer.recycle();
+            int width = getMeasuredWidth();
+            int height = getMeasuredHeight();
+            if(width > 0 && height > 0) {
+                double defaultAngularFrequency = 2.0f * Math.PI / DEFAULT_WAVE_LENGTH_RATIO / width;
+                float defaultAmplitude = height * DEFAULT_AMPLITUDE_RATIO;
+                mDefaultWaterLevel = height * DEFAULT_WATER_LEVEL_RATIO;
+                float defaultWaveLength = width;
 
-        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
+                Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
 
-        Paint wavePaint = new Paint();
-        wavePaint.setStrokeWidth(2);
-        wavePaint.setAntiAlias(true);
+                Paint wavePaint = new Paint();
+                wavePaint.setStrokeWidth(2);
+                wavePaint.setAntiAlias(true);
 
-        // Draw default waves into the bitmap.
-        // y=Asin(ωx+φ)+h
-        final int endX = getWidth() + 1;
-        final int endY = getHeight() + 1;
+                // Draw default waves into the bitmap.
+                // y=Asin(ωx+φ)+h
+                final int endX = width + 1;
+                final int endY = height + 1;
 
-        float[] waveY = new float[endX];
+                float[] waveY = new float[endX];
 
-        wavePaint.setColor(adjustAlpha(mWaveColor, 0.3f));
-        for (int beginX = 0; beginX < endX; beginX++) {
-            double wx = beginX * defaultAngularFrequency;
-            float beginY = (float) (mDefaultWaterLevel + defaultAmplitude * Math.sin(wx));
-            canvas.drawLine(beginX, beginY, beginX, endY, wavePaint);
-            waveY[beginX] = beginY;
+                wavePaint.setColor(adjustAlpha(mWaveColor, 0.3f));
+                for (int beginX = 0; beginX < endX; beginX++) {
+                    double wx = beginX * defaultAngularFrequency;
+                    float beginY = (float) (mDefaultWaterLevel + defaultAmplitude * Math.sin(wx));
+                    canvas.drawLine(beginX, beginY, beginX, endY, wavePaint);
+                    waveY[beginX] = beginY;
+                }
+
+                wavePaint.setColor(mWaveColor);
+                final int wave2Shift = (int) (defaultWaveLength / 4);
+                for (int beginX = 0; beginX < endX; beginX++) {
+                    canvas.drawLine(beginX, waveY[(beginX + wave2Shift) % endX], beginX, endY, wavePaint);
+                }
+
+                // Use the bitamp to create the shader.
+                mWaveShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+                this.mWavePaint.setShader(mWaveShader);
+            }
         }
+    }
 
-        wavePaint.setColor(mWaveColor);
-        final int wave2Shift = (int) (defaultWaveLength / 4);
-        for (int beginX = 0; beginX < endX; beginX++) {
-            canvas.drawLine(beginX, waveY[(beginX + wave2Shift) % endX], beginX, endY, wavePaint);
-        }
-
-        // Use the bitamp to create the shader.
-        mWaveShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
-        this.mWavePaint.setShader(mWaveShader);
+    private boolean haveBoundsChanged() {
+        return getMeasuredWidth() != bitmapBuffer.getWidth() ||
+                getMeasuredHeight() != bitmapBuffer.getHeight();
     }
 
     @Override
