@@ -23,9 +23,9 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.1.5'
-    // I have uploaded v0.1.5 on 2016-01-14, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.1.4. 
+    compile 'me.itangqi.waveloadingview:library:2.0.0'
+    // I have uploaded v2.0.0 on 2016-02-17, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.1.5. 
 }
 ```	
 Or
@@ -41,21 +41,21 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
     android:id="@+id/waveLoadingView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:mlv_borderColor="@color/colorAccent"
-    app:mlv_borderWidth="3dp"
-    app:mlv_progressValue="40"
-    app:mlv_shapeType="square"
-    app:mlv_titleBottom="Bottom Title"
-    app:mlv_titleBottomColor="@color/colorPrimaryText"
-    app:mlv_titleBottomSize="20sp"
-    app:mlv_titleCenter="Center Title"
-    app:mlv_titleCenterColor="@color/colorPrimaryText"
-    app:mlv_titleCenterSize="24sp"
-    app:mlv_titleTop="Top Title"
-    app:mlv_titleTopColor="@color/colorPrimaryText"
-    app:mlv_titleTopSize="20sp"
-    app:mlv_waveAmplitude="60"
-    app:mlv_waveColor="@color/colorAccent"/>        
+    app:wlv_borderColor="@color/colorAccent"
+    app:wlv_borderWidth="3dp"
+    app:wlv_progressValue="40"
+    app:wlv_shapeType="circle"
+    app:wlv_titleBottom="Bottom Title"
+    app:wlv_titleBottomColor="@color/colorPrimaryText"
+    app:wlv_titleBottomSize="20sp"
+    app:wlv_titleCenter="Center Title"
+    app:wlv_titleCenterColor="@color/colorPrimaryText"
+    app:wlv_titleCenterSize="24sp"
+    app:wlv_titleTop="Top Title"
+    app:wlv_titleTopColor="@color/colorPrimaryText"
+    app:wlv_titleTopSize="20sp"
+    app:wlv_waveAmplitude="70"
+    app:wlv_waveColor="@color/colorAccent"/>       
 ```
 
 ### Step 3
@@ -82,26 +82,41 @@ Do what you what :)
 
 |name|format|description|
 |:---:|:---:|:---:|
-| mlv_borderWidth | dimension |set border width, default is 0
-| mlv_borderColor | color |set border color
-| mlv_progressValue | integer |set progress value, default is 50
-| mlv_shapeType | enum |set shape type, default is circle
-| mlv_waveColor | color |set wave color
-| mlv_waveAmplitude | float |set wave amplitude
-| mlv_titleTopSize | dimension |set top title size, default is 18 
-| mlv_titleCenterSize | dimension |set center title size, default is 22
-| mlv_titleBottomSize | dimension |set bottom size, default is 18
-| mlv_titleTopColor| color |set top title color
-| mlv_titleCenterColor | color |set center title color 
-| mlv_titleBottomColor | color |set bottom title color 
-| mlv_titleTop | string |set top title content, default is null
-| mlv_titleCenter | string |set center title content, default is null
-| mlv_titleBottom | string |set bottom title content, default is null
+| wlv_borderWidth | dimension |set border width, default is 0
+| wlv_borderColor | color |set border color
+| wlv_progressValue | integer |set progress value, default is 50
+| wlv_shapeType | enum |set shape type, default is circle
+| wlv_waveColor | color |set wave color
+| wlv_waveAmplitude | float |set wave amplitude
+| wlv_titleTopSize | dimension |set top title size, default is 18 
+| wlv_titleCenterSize | dimension |set center title size, default is 22
+| wlv_titleBottomSize | dimension |set bottom size, default is 18
+| wlv_titleTopColor| color |set top title color
+| wlv_titleCenterColor | color |set center title color 
+| wlv_titleBottomColor | color |set bottom title color 
+| wlv_titleTop | string |set top title content, default is null
+| wlv_titleCenter | string |set center title content, default is null
+| wlv_titleBottom | string |set bottom title content, default is null
 
 **All attributes have their respective getters and setters to change them at runtime.**
 
 
 ## Change Log
+
+### 0.1.6 (2016-02-17)
+
+#### Implemented enhancements:
+
+- Prefix the attributes with "wlv"
+
+#### Fixed bugs:
+
+- setProgressValue() increase doesn't conform to logic [#8](https://github.com/tangqi92/WaveLoadingView/issues/8)
+
+#### Update:
+
+- Update `build.gradle`
+- Update Sample
 
 ### 0.1.5 (2016-01-14)
 
@@ -120,13 +135,7 @@ Do what you what :)
 
 #### Fixed bugs:
 
-
 - Attribute "borderWidth" has already been defined [#2](https://github.com/tangqi92/WaveLoadingView/issues/2)
-
-#### Implemented enhancements:
-
-- Prefix the attributes with "wlv"
-
 
 
 ## Demo

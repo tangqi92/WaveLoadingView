@@ -120,47 +120,47 @@ public class WaveLoadingView extends View {
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.WaveLoadingView, defStyleAttr, 0);
 
         // Init ShapeType
-        mShapeType = attributes.getInteger(R.styleable.WaveLoadingView_mlv_shapeType, DEFAULT_WAVE_SHAPE);
+        mShapeType = attributes.getInteger(R.styleable.WaveLoadingView_wlv_shapeType, DEFAULT_WAVE_SHAPE);
 
         // Init Wave
-        mWaveColor = attributes.getColor(R.styleable.WaveLoadingView_mlv_waveColor, DEFAULT_WAVE_COLOR);
+        mWaveColor = attributes.getColor(R.styleable.WaveLoadingView_wlv_waveColor, DEFAULT_WAVE_COLOR);
 
         // Init AmplitudeRatio
-        float amplitudeRatioAttr = attributes.getFloat(R.styleable.WaveLoadingView_mlv_waveAmplitude, DEFAULT_AMPLITUDE_RATIO) / 1000;
+        float amplitudeRatioAttr = attributes.getFloat(R.styleable.WaveLoadingView_wlv_waveAmplitude, DEFAULT_AMPLITUDE_RATIO) / 1000;
         mAmplitudeRatio = (amplitudeRatioAttr > DEFAULT_AMPLITUDE_RATIO) ? DEFAULT_AMPLITUDE_RATIO : amplitudeRatioAttr;
 
         // Init Progress
-        mProgressValue = attributes.getInteger(R.styleable.WaveLoadingView_mlv_progressValue, DEFAULT_WAVE_PROGRESS_VALUE);
+        mProgressValue = attributes.getInteger(R.styleable.WaveLoadingView_wlv_progressValue, DEFAULT_WAVE_PROGRESS_VALUE);
         setProgressValue(mProgressValue);
 
         // Init Border
         mBorderPaint = new Paint();
         mBorderPaint.setAntiAlias(true);
         mBorderPaint.setStyle(Paint.Style.STROKE);
-        mBorderPaint.setStrokeWidth(attributes.getDimension(R.styleable.WaveLoadingView_mlv_borderWidth, dp2px(DEFAULT_BORDER_WIDTH)));
-        mBorderPaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_borderColor, DEFAULT_WAVE_COLOR));
+        mBorderPaint.setStrokeWidth(attributes.getDimension(R.styleable.WaveLoadingView_wlv_borderWidth, dp2px(DEFAULT_BORDER_WIDTH)));
+        mBorderPaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_borderColor, DEFAULT_WAVE_COLOR));
 
         // Init Title
         mTopTitlePaint = new Paint();
-        mTopTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_titleTopColor, DEFAULT_TITLE_COLOR));
+        mTopTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleTopColor, DEFAULT_TITLE_COLOR));
         mTopTitlePaint.setStyle(Paint.Style.FILL);
         mTopTitlePaint.setAntiAlias(true);
-        mTopTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_mlv_titleTopSize, sp2px(DEFAULT_TITLE_TOP_SIZE)));
-        mTopTitle = attributes.getString(R.styleable.WaveLoadingView_mlv_titleTop);
+        mTopTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleTopSize, sp2px(DEFAULT_TITLE_TOP_SIZE)));
+        mTopTitle = attributes.getString(R.styleable.WaveLoadingView_wlv_titleTop);
 
         mCenterTitlePaint = new Paint();
-        mCenterTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_titleCenterColor, DEFAULT_TITLE_COLOR));
+        mCenterTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleCenterColor, DEFAULT_TITLE_COLOR));
         mCenterTitlePaint.setStyle(Paint.Style.FILL);
         mCenterTitlePaint.setAntiAlias(true);
-        mCenterTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_mlv_titleCenterSize, sp2px(DEFAULT_TITLE_CENTER_SIZE)));
-        mCenterTitle = attributes.getString(R.styleable.WaveLoadingView_mlv_titleCenter);
+        mCenterTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleCenterSize, sp2px(DEFAULT_TITLE_CENTER_SIZE)));
+        mCenterTitle = attributes.getString(R.styleable.WaveLoadingView_wlv_titleCenter);
 
         mBottomTitlePaint = new Paint();
-        mBottomTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_mlv_titleBottomColor, DEFAULT_TITLE_COLOR));
+        mBottomTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleBottomColor, DEFAULT_TITLE_COLOR));
         mBottomTitlePaint.setStyle(Paint.Style.FILL);
         mBottomTitlePaint.setAntiAlias(true);
-        mBottomTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_mlv_titleBottomSize, sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
-        mBottomTitle = attributes.getString(R.styleable.WaveLoadingView_mlv_titleBottom);
+        mBottomTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomSize, sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
+        mBottomTitle = attributes.getString(R.styleable.WaveLoadingView_wlv_titleBottom);
     }
 
     @Override
@@ -409,7 +409,7 @@ public class WaveLoadingView extends View {
      */
     public void setProgressValue(int progress) {
         mProgressValue = progress;
-        ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(this, "waterLevelRatio", mWaterLevelRatio, 1f - ((float) progress / 100));
+        ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(this, "waterLevelRatio", mWaterLevelRatio, ((float) mProgressValue / 100));
         waterLevelAnim.setDuration(1000);
         waterLevelAnim.setInterpolator(new DecelerateInterpolator());
         AnimatorSet animatorSetProgress = new AnimatorSet();
