@@ -142,6 +142,11 @@ Do what you what :)
 
 [Download](https://github.com/tangqi92/WaveLoadingView/releases/download/v0.1.2/sample-release-unsigned.apk)
 
+## Apps using the WaveLoadingView
+
+Feel free to send me new projects
+
+- [Easy Fit Calorie Counter](https://play.google.com/store/apps/details?id=com.marioherzberg.swipeviews_tutorial1)
 
 
 ## Community
