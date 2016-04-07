@@ -161,6 +161,7 @@ public class WaveLoadingView extends View {
         mBottomTitlePaint.setAntiAlias(true);
         mBottomTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomSize, sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
         mBottomTitle = attributes.getString(R.styleable.WaveLoadingView_wlv_titleBottom);
+        attributes.recycle();
     }
 
     @Override
