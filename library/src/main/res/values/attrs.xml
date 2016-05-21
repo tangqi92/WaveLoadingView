@@ -6,9 +6,21 @@
         <attr name="wlv_borderColor" format="color"/>
         <attr name="wlv_progressValue" format="integer"/>
         <attr name="wlv_shapeType" format="enum">
-            <enum name="circle" value="0" />
-            <enum name="square" value="1" />
+            <enum name="triangle" value="0" />
+            <enum name="circle" value="1" />
+            <enum name="square" value="2" />
+            <enum name="rectangle" value="3" />
         </attr>
+        <attr name="wlv_triangle_direction" format="enum">
+            <enum name="north" value="0" />
+            <enum name="south" value="1" />
+            <enum name="east" value="2" />
+            <enum name="west" value="3" />
+        </attr>
+        <attr name="wlv_rectangle_width" format="integer"/>
+        <attr name="wlv_rectangle_height" format="integer"/>
+        <attr name="wlv_round_rectangle" format="boolean"/>
+        <attr name="wlv_round_rectangle_x_and_y" format="integer"/>
         <attr name="wlv_waveColor" format="color"/>
         <attr name="wlv_waveAmplitude" format="float"/>
         <attr name="wlv_titleTopSize" format="dimension"/>
