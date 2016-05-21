@@ -50,12 +50,12 @@ public class WaveLoadingView extends View {
     // This is incorrect/not recommended by Joshua Bloch in his book Effective Java (2nd ed).
     private static final int DEFAULT_WAVE_SHAPE = ShapeType.CIRCLE.ordinal();
     private static final int DEFAULT_TRIANGLE_DIRECTION = TriangleDirection.NORTH.ordinal();
+    private static final int DEFAULT_RECTANGLE_WIDTH = 700;
+    private static final int DEFAULT_RECTANGLE_HEIGHT = 350;
+    private static final int DEFAULT_ROUND_RECTANGLE_X_AND_Y = 30;
     private static final float DEFAULT_TITLE_TOP_SIZE = 18.0f;
     private static final float DEFAULT_TITLE_CENTER_SIZE = 22.0f;
     private static final float DEFAULT_TITLE_BOTTOM_SIZE = 18.0f;
-    private static final int DEFAULT_ROUND_RECTANGLE_X_AND_Y = 30;
-    private static final int DEFAULT_RECTANGLE_WIDTH = 600;
-    private static final int DEFAULT_RECTANGLE_HEIGHT = 300;
 
     public enum ShapeType {
         TRIANGLE,
@@ -79,6 +79,7 @@ public class WaveLoadingView extends View {
     private int mShapeRectangleWidth;
     private int mShapeRectangleHeight;
     private int mTriangleDirection;
+    private int mRoundRectangleXY;
 
     // Properties.
     private String mTopTitle;
@@ -88,8 +89,7 @@ public class WaveLoadingView extends View {
     private float mWaterLevelRatio = 1f;
     private float mWaveShiftRatio = DEFAULT_WAVE_SHIFT_RATIO;
     private int mProgressValue = DEFAULT_WAVE_PROGRESS_VALUE;
-    private boolean mIsRoundRectangle = false;
-    private int mRoundRectangleXY = DEFAULT_ROUND_RECTANGLE_X_AND_Y;
+    private boolean mIsRoundRectangle;
 
     // Object used to draw.
     // Shader containing repeated waves.
@@ -154,11 +154,11 @@ public class WaveLoadingView extends View {
         mProgressValue = attributes.getInteger(R.styleable.WaveLoadingView_wlv_progressValue, DEFAULT_WAVE_PROGRESS_VALUE);
         setProgressValue(mProgressValue);
 
-        // Init Rectangle's width and height, default id getWidth() and getHeight() / 2
+        // Init Rectangle's width and height
         mShapeRectangleWidth = attributes.getInteger(R.styleable.WaveLoadingView_wlv_rectangle_width, DEFAULT_RECTANGLE_WIDTH);
         mShapeRectangleHeight = attributes.getInteger(R.styleable.WaveLoadingView_wlv_rectangle_height, DEFAULT_RECTANGLE_HEIGHT);
 
-        // Init RoundRectangle, default is false
+        // Init RoundRectangle
         mIsRoundRectangle = attributes.getBoolean(R.styleable.WaveLoadingView_wlv_round_rectangle, false);
         mRoundRectangleXY = attributes.getInteger(R.styleable.WaveLoadingView_wlv_round_rectangle_x_and_y, DEFAULT_ROUND_RECTANGLE_X_AND_Y);
 
@@ -228,14 +228,10 @@ public class WaveLoadingView extends View {
             switch (mShapeType) {
                 // Draw triangle
                 case 0:
-                    if (borderWidth > 0) {
-                        Point start = new Point(0, getWidth());
-                        Path path5 = getEquilateralTriangle(start, getWidth(),getHeight(), mTriangleDirection);
-                        canvas.drawPath(path5, mWavePaint);
-                    }
-                    Point start = new Point(0, getWidth());
-                    Path path5 = getEquilateralTriangle(start, getWidth(),getHeight(), mTriangleDirection);
-                    canvas.drawPath(path5, mWavePaint);
+                    // At present do not support the borderWidth settings
+                    Point start = new Point(0, getHeight());
+                    Path triangle = getEquilateralTriangle(start, getWidth(), getHeight(), mTriangleDirection);
+                    canvas.drawPath(triangle, mWavePaint);
                     break;
                 // Draw circle
                 case 1:
@@ -262,25 +258,14 @@ public class WaveLoadingView extends View {
                 // Draw rectangle
                 case 3:
                     if (mIsRoundRectangle) {
-                            if (borderWidth > 0) {
-                                RectF rect = new RectF((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
-                                        getHeight());
-                                canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
-                            } else {
-                            RectF rect = new RectF((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
+                        // At present do not support the borderWidth settings
+                        RectF rect = new RectF((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
                                     getHeight());
-                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
-                            }
-
-
+                        canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
                     }else {
-                        if (borderWidth > 0) {
-                            canvas.drawRect((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
+                        // At present do not support the borderWidth settings
+                        canvas.drawRect((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
                                     getHeight(),  mWavePaint);
-                        } else {
-                            canvas.drawRect((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
-                                    getHeight(),  mWavePaint);
-                        }
                     }
                     break;
                 default:
@@ -649,38 +634,49 @@ public class WaveLoadingView extends View {
      * @param spValue The real size of text
      * @return int - A transplanted sp
      */
-    public int sp2px(float spValue) {
+    private int sp2px(float spValue) {
         final float fontScale = mContext.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
-    protected int dp2px(float dp) {
+    private int dp2px(float dp) {
         final float scale = mContext.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
 
-    public static Path getEquilateralTriangle(Point p1, int width, int height, int direction) {
+    /**
+     * Draw EquilateralTriangle
+     * @param p1 Start point
+     * @param width
+     * @param height
+     * @param direction
+     * @return
+     */
+    private Path getEquilateralTriangle(Point p1, int width, int height, int direction) {
         Point p2 = null, p3 = null;
-
+        // NORTH
         if (direction == 0) {
             p2 = new Point(p1.x + width, p1.y);
-            p3 = new Point(p1.x + (width / 2), (int) (height -Math.sqrt(3.0) / 2* width));
+            p3 = new Point(p1.x + (width / 2), (int) (height - Math.sqrt(3.0) / 2 * height));
         }
+        // SOUTH
         else if (direction == 1) {
             p2 = new Point(p1.x, p1.y - height);
             p3 = new Point(p1.x + width, p1.y - height);
             p1.x = p1.x + (width / 2);
-            p1.y = (int) (Math.sqrt(3.0) / 2* height);
+            p1.y = (int) (Math.sqrt(3.0) / 2 * height);
         }
+        // EAST
         else if (direction == 2) {
             p2 = new Point(p1.x, p1.y - height);
-            p3 = new Point((int) (Math.sqrt(3.0) / 2* height), p1.y / 2);
+            p3 = new Point((int) (Math.sqrt(3.0) / 2 * width), p1.y / 2);
         }
+        // WEST
         else if (direction == 3) {
             p2 = new Point(p1.x + width, p1.y - height);
             p3 = new Point(p1.x + width, p1.y);
-            p1.x = (int) (width -Math.sqrt(3.0) / 2* width);
-            p1.y = height / 2;
+            p1.x = (int) (width - Math.sqrt(3.0) / 2 * width);
+            p1.y = p1.y / 2;
         }
 
         Path path = new Path();
@@ -690,6 +686,4 @@ public class WaveLoadingView extends View {
 
         return path;
     }
-
-
 }
