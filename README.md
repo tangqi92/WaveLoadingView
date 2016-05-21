@@ -154,7 +154,7 @@ Please feel free to :)
 
 ## Demo
 
-[Download](https://github.com/tangqi92/WaveLoadingView/releases/download/v0.1.2/sample-release-unsigned.apk)
+[Download](https://github.com/tangqi92/WaveLoadingView/releases/download/v0.2.1/sample-release-unsigned.apk)
 
 ## Apps using the WaveLoadingView
 
