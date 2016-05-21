@@ -1,11 +1,13 @@
 package me.itangqi.waveloadingview;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioGroup;
 
 import com.larswerkman.lobsterpicker.OnColorListener;
 import com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider;
@@ -15,6 +17,7 @@ import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 public class MainActivity extends AppCompatActivity {
 
     private WaveLoadingView mWaveLoadingView;
+    private int checkedItem = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +27,40 @@ public class MainActivity extends AppCompatActivity {
         mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadingView);
 
         // Shape Type
-        ((RadioGroup) findViewById(R.id.rg_shape))
-                .setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                        switch (i) {
-                            case R.id.rb_shape_circle:
+        findViewById(R.id.tv_shape).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new AlertDialog.Builder(MainActivity.this).setTitle("Shape Type").setSingleChoiceItems(
+                        new String[] { "CIRCLE", "TRIANGLE", "SQUARE", "RECTANGLE" }, checkedItem,
+              new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        checkedItem = which;
+                        switch (which) {
+                            case 0:
                                 mWaveLoadingView.setShapeType(WaveLoadingView.ShapeType.CIRCLE);
+                                dialog.dismiss();
                                 break;
-                            case R.id.rb_shape_square:
+                            case 1:
+                                mWaveLoadingView.setShapeType(WaveLoadingView.ShapeType.TRIANGLE);
+                                dialog.dismiss();
+                                break;
+                            case 2:
                                 mWaveLoadingView.setShapeType(WaveLoadingView.ShapeType.SQUARE);
+                                dialog.dismiss();
+                                break;
+                            case 3:
+                                mWaveLoadingView.setShapeType(WaveLoadingView.ShapeType.RECTANGLE);
+                                dialog.dismiss();
                                 break;
                             default:
+                                dialog.dismiss();
                                 break;
                         }
                     }
-                });
+              }).show();
+            }
+        });
 
         // Top Title
         ((CheckBox) findViewById(R.id.cb_title_top)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

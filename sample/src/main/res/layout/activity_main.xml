@@ -21,15 +21,11 @@
             app:wlv_borderWidth="3dp"
             app:wlv_progressValue="40"
             app:wlv_shapeType="circle"
-            app:wlv_titleBottom="Bottom Title"
-            app:wlv_titleBottomColor="@color/colorPrimaryText"
-            app:wlv_titleBottomSize="20sp"
+            app:wlv_round_rectangle="true"
+            app:wlv_triangle_direction="north"
             app:wlv_titleCenter="Center Title"
             app:wlv_titleCenterColor="@color/colorPrimaryText"
             app:wlv_titleCenterSize="24sp"
-            app:wlv_titleTop="Top Title"
-            app:wlv_titleTopColor="@color/colorPrimaryText"
-            app:wlv_titleTopSize="20sp"
             app:wlv_waveAmplitude="70"
             app:wlv_waveColor="@color/colorAccent"/>
 
@@ -38,7 +34,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
@@ -62,30 +57,16 @@
                     android:text="Shape Type:"
                     android:textColor="@color/colorPrimaryText"/>
 
-                <RadioGroup
-                    android:id="@+id/rg_shape"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/tv_shape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:gravity="center_vertical"
                     android:layout_alignTop="@+id/tv_shape_type"
                     android:layout_marginLeft="4dp"
                     android:layout_toRightOf="@id/tv_shape_type"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rb_shape_circle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:text="Circle"/>
-
-                    <RadioButton
-                        android:id="@+id/rb_shape_square"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Square"/>
-                </RadioGroup>
+                    android:text="Click me to change shape type"
+                    android:textColor="@color/colorAccent"/>
 
                 <TextView
                     android:id="@+id/tv_title"
@@ -101,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/tv_title"
-                    android:layout_below="@+id/rg_shape"
+                    android:layout_below="@+id/tv_shape"
                     android:layout_marginLeft="4dp"
                     android:layout_toRightOf="@id/tv_title"
                     android:orientation="horizontal">
@@ -111,7 +92,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:checked="true"
                         android:text="Top"/>
 
                     <CheckBox
@@ -119,6 +99,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="true"
                         android:text="Center"/>
 
                     <CheckBox
@@ -209,7 +190,7 @@
 
                 <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
                     android:id="@+id/shadeslider_wave_color"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/tv_wave_color"
                     android:layout_below="@+id/seek_bar_amplitude"
@@ -227,7 +208,7 @@
 
                 <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
                     android:id="@+id/shadeslider_border_color"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/tv_border_color"
                     android:layout_below="@+id/shadeslider_wave_color"

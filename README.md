@@ -23,9 +23,9 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.2.0'
-    // I have uploaded v0.2.0 on 2016-02-17, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.1.5. 
+    compile 'me.itangqi.waveloadingview:library:0.2.1'
+    // I have uploaded v0.2.0 on 2016-05-21, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.2.0. 
 }
 ```	
 Or
@@ -45,17 +45,13 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
     app:wlv_borderWidth="3dp"
     app:wlv_progressValue="40"
     app:wlv_shapeType="circle"
-    app:wlv_titleBottom="Bottom Title"
-    app:wlv_titleBottomColor="@color/colorPrimaryText"
-    app:wlv_titleBottomSize="20sp"
+    app:wlv_round_rectangle="true"
+    app:wlv_triangle_direction="north"
     app:wlv_titleCenter="Center Title"
     app:wlv_titleCenterColor="@color/colorPrimaryText"
     app:wlv_titleCenterSize="24sp"
-    app:wlv_titleTop="Top Title"
-    app:wlv_titleTopColor="@color/colorPrimaryText"
-    app:wlv_titleTopSize="20sp"
     app:wlv_waveAmplitude="70"
-    app:wlv_waveColor="@color/colorAccent"/>       
+    app:wlv_waveColor="@color/colorAccent"/>   
 ```
 
 ### Step 3
@@ -78,30 +74,48 @@ WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadi
 
 ## Customization
 
-Do what you what :)
+Please feel free to :)
 
 |name|format|description|
 |:---:|:---:|:---:|
-| wlv_borderWidth | dimension |set border width, default is 0
-| wlv_borderColor | color |set border color
-| wlv_progressValue | integer |set progress value, default is 50
-| wlv_shapeType | enum |set shape type, default is circle
-| wlv_waveColor | color |set wave color
-| wlv_waveAmplitude | float |set wave amplitude
-| wlv_titleTopSize | dimension |set top title size, default is 18 
-| wlv_titleCenterSize | dimension |set center title size, default is 22
-| wlv_titleBottomSize | dimension |set bottom size, default is 18
-| wlv_titleTopColor| color |set top title color
-| wlv_titleCenterColor | color |set center title color 
-| wlv_titleBottomColor | color |set bottom title color 
-| wlv_titleTop | string |set top title content, default is null
-| wlv_titleCenter | string |set center title content, default is null
-| wlv_titleBottom | string |set bottom title content, default is null
+| wlv_borderWidth | dimension |Border width, default is 0
+| wlv_borderColor | color | Border color
+| wlv_progressValue | integer | Pprogress value, default is 50
+| wlv_shapeType | enum | Shape type, default is circle
+| wlv_triangle_direction | enum | Triangle direction, default is north
+| wlv_rectangle_width | integer | Rectangle width, default is 700
+| wlv_rectangle_height | integer | Rectangle height, default is 350
+| wlv_round_rectangle | boolean | Is round rectangle, default is false
+| wlv_round_rectangle_x_and_y | integer | Round Rectangle corners, default is 30
+| wlv_waveColor | color | Wave color
+| wlv_waveAmplitude | float | Wave amplitude
+| wlv_titleTop | string | Top title content, default is null
+| wlv_titleCenter | string | Center title content, default is null
+| wlv_titleBottom | string | Bottom title content, default is null
+| wlv_titleTopSize | dimension | Top title size, default is 18 
+| wlv_titleCenterSize | dimension | Center title size, default is 22
+| wlv_titleBottomSize | dimension | Bottom size, default is 18
+| wlv_titleTopColor | color | Top title color
+| wlv_titleCenterColor | color | Center title color 
+| wlv_titleBottomColor | color | Bottom title color 
+
 
 **All attributes have their respective getters and setters to change them at runtime.**
 
 
 ## Change Log
+
+### 0.2.1 (2016-05-21)
+
+#### Update:
+
+- Update more shape types like: Rectangle, Round Rectangle, Triangle...etc [#7](https://github.com/tangqi92/WaveLoadingView/issues/7)
+- Update `build.gradle`
+- Update Sample
+
+#### Plan:
+
+- Title position fit shape size
 
 ### 0.2.0 (2016-02-17)
 

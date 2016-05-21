@@ -228,7 +228,7 @@ public class WaveLoadingView extends View {
             switch (mShapeType) {
                 // Draw triangle
                 case 0:
-                    // At present do not support the borderWidth settings
+                    // Currently does not support the border settings
                     Point start = new Point(0, getHeight());
                     Path triangle = getEquilateralTriangle(start, getWidth(), getHeight(), mTriangleDirection);
                     canvas.drawPath(triangle, mWavePaint);
@@ -258,12 +258,12 @@ public class WaveLoadingView extends View {
                 // Draw rectangle
                 case 3:
                     if (mIsRoundRectangle) {
-                        // At present do not support the borderWidth settings
+                        // Currently does not support the border settings
                         RectF rect = new RectF((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
                                     getHeight());
                         canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
                     }else {
-                        // At present do not support the borderWidth settings
+                        // Currently does not support the border settings
                         canvas.drawRect((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
                                     getHeight(),  mWavePaint);
                     }
@@ -647,10 +647,10 @@ public class WaveLoadingView extends View {
     /**
      * Draw EquilateralTriangle
      * @param p1 Start point
-     * @param width
-     * @param height
-     * @param direction
-     * @return
+     * @param width The width of triangle
+     * @param height The height of triangle
+     * @param direction The direction of triangle
+     * @return Path
      */
     private Path getEquilateralTriangle(Point p1, int width, int height, int direction) {
         Point p2 = null, p3 = null;

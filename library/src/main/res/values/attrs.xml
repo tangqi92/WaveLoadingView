@@ -23,15 +23,15 @@
         <attr name="wlv_round_rectangle_x_and_y" format="integer"/>
         <attr name="wlv_waveColor" format="color"/>
         <attr name="wlv_waveAmplitude" format="float"/>
+        <attr name="wlv_titleTop" format="string"/>
+        <attr name="wlv_titleCenter" format="string"/>
+        <attr name="wlv_titleBottom" format="string"/>
         <attr name="wlv_titleTopSize" format="dimension"/>
         <attr name="wlv_titleCenterSize" format="dimension"/>
         <attr name="wlv_titleBottomSize" format="dimension"/>
         <attr name="wlv_titleTopColor" format="color"/>
         <attr name="wlv_titleCenterColor" format="color"/>
         <attr name="wlv_titleBottomColor" format="color"/>
-        <attr name="wlv_titleTop" format="string"/>
-        <attr name="wlv_titleCenter" format="string"/>
-        <attr name="wlv_titleBottom" format="string"/>
     </declare-styleable>
 
 </resources>
