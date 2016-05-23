@@ -105,6 +105,14 @@ Please feel free to :)
 
 ## Change Log
 
+
+
+### 0.2.2（2016-05-23）
+
+#### Fixed bugs:
+
+- Default amplitude value [#12](https://github.com/tangqi92/WaveLoadingView/issues/12)
+
 ### 0.2.1 (2016-05-21)
 
 #### Update:

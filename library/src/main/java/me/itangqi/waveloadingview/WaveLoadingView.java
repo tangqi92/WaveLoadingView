@@ -40,6 +40,7 @@ public class WaveLoadingView extends View {
      * +------------------------+__|_______
      */
     private static final float DEFAULT_AMPLITUDE_RATIO = 0.1f;
+    private static final float DEFAULT_AMPLITUDE_VALUE = 50.0f;
     private static final float DEFAULT_WATER_LEVEL_RATIO = 0.5f;
     private static final float DEFAULT_WAVE_LENGTH_RATIO = 1.0f;
     private static final float DEFAULT_WAVE_SHIFT_RATIO = 0.0f;
@@ -147,7 +148,7 @@ public class WaveLoadingView extends View {
         mWaveColor = attributes.getColor(R.styleable.WaveLoadingView_wlv_waveColor, DEFAULT_WAVE_COLOR);
 
         // Init AmplitudeRatio
-        float amplitudeRatioAttr = attributes.getFloat(R.styleable.WaveLoadingView_wlv_waveAmplitude, DEFAULT_AMPLITUDE_RATIO) / 1000;
+        float amplitudeRatioAttr = attributes.getFloat(R.styleable.WaveLoadingView_wlv_waveAmplitude, DEFAULT_AMPLITUDE_VALUE) / 1000;
         mAmplitudeRatio = (amplitudeRatioAttr > DEFAULT_AMPLITUDE_RATIO) ? DEFAULT_AMPLITUDE_RATIO : amplitudeRatioAttr;
 
         // Init Progress
