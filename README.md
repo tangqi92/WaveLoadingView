@@ -23,9 +23,9 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.2.1'
-    // I have uploaded v0.2.0 on 2016-05-21, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.2.0. 
+    compile 'me.itangqi.waveloadingview:library:0.2.3'
+    // I have uploaded v0.2.3 on 2016-05-25, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.2.2. 
 }
 ```	
 Or
@@ -105,7 +105,11 @@ Please feel free to :)
 
 ## Change Log
 
+### 0.2.3（2016-05-25）
 
+#### Update:
+
+- Support the `minSdkVersion` to 14 
 
 ### 0.2.2（2016-05-23）
 
