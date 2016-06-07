@@ -5,11 +5,9 @@
 
 **WaveLoadingView** - An Android library that provides a realistic wave-loading effect.
 
-<img src="/screenshots/ss.png" alt="screenshot" title="screenshot" width="400" height="450" /> 
-
 ## Sample
 
-<img src="/screenshots/sample.gif" alt="sample" title="sample" width="400" height="680" />
+<img src="http://7xikfc.com1.z0.glb.clouddn.com/waveloadingview.png" alt="sample" title="sample" width="400" height="680" />
 
 
 
@@ -23,9 +21,9 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.2.3'
-    // I have uploaded v0.2.3 on 2016-05-25, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.2.2. 
+    compile 'me.itangqi.waveloadingview:library:0.3.0'
+    // I have uploaded v0.3.0 on 2016-06-07, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.2.3. 
 }
 ```	
 Or
@@ -83,8 +81,6 @@ Please feel free to :)
 | wlv_progressValue | integer | Pprogress value, default is 50
 | wlv_shapeType | enum | Shape type, default is circle
 | wlv_triangle_direction | enum | Triangle direction, default is north
-| wlv_rectangle_width | integer | Rectangle width, default is 700
-| wlv_rectangle_height | integer | Rectangle height, default is 350
 | wlv_round_rectangle | boolean | Is round rectangle, default is false
 | wlv_round_rectangle_x_and_y | integer | Round Rectangle corners, default is 30
 | wlv_waveColor | color | Wave color
@@ -104,6 +100,12 @@ Please feel free to :)
 
 
 ## Change Log
+
+### 0.3.0 (2016-06-07)
+
+#### Fixed bugs:
+
+- How to set match_parent width? [#12](https://github.com/tangqi92/WaveLoadingView/issues/12)
 
 ### 0.2.3（2016-05-25）
 

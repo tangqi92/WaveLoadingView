@@ -17,8 +17,6 @@
             <enum name="east" value="2" />
             <enum name="west" value="3" />
         </attr>
-        <attr name="wlv_rectangle_width" format="integer"/>
-        <attr name="wlv_rectangle_height" format="integer"/>
         <attr name="wlv_round_rectangle" format="boolean"/>
         <attr name="wlv_round_rectangle_x_and_y" format="integer"/>
         <attr name="wlv_waveColor" format="color"/>

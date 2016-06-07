@@ -51,8 +51,6 @@ public class WaveLoadingView extends View {
     // This is incorrect/not recommended by Joshua Bloch in his book Effective Java (2nd ed).
     private static final int DEFAULT_WAVE_SHAPE = ShapeType.CIRCLE.ordinal();
     private static final int DEFAULT_TRIANGLE_DIRECTION = TriangleDirection.NORTH.ordinal();
-    private static final int DEFAULT_RECTANGLE_WIDTH = 700;
-    private static final int DEFAULT_RECTANGLE_HEIGHT = 350;
     private static final int DEFAULT_ROUND_RECTANGLE_X_AND_Y = 30;
     private static final float DEFAULT_TITLE_TOP_SIZE = 18.0f;
     private static final float DEFAULT_TITLE_CENTER_SIZE = 22.0f;
@@ -74,11 +72,11 @@ public class WaveLoadingView extends View {
 
     // Dynamic Properties.
     private int mCanvasSize;
+    private int mCanvasHeight;
+    private int mCanvasWidth;
     private float mAmplitudeRatio;
     private int mWaveColor;
     private int mShapeType;
-    private int mShapeRectangleWidth;
-    private int mShapeRectangleHeight;
     private int mTriangleDirection;
     private int mRoundRectangleXY;
 
@@ -154,10 +152,6 @@ public class WaveLoadingView extends View {
         // Init Progress
         mProgressValue = attributes.getInteger(R.styleable.WaveLoadingView_wlv_progressValue, DEFAULT_WAVE_PROGRESS_VALUE);
         setProgressValue(mProgressValue);
-
-        // Init Rectangle's width and height
-        mShapeRectangleWidth = attributes.getInteger(R.styleable.WaveLoadingView_wlv_rectangle_width, DEFAULT_RECTANGLE_WIDTH);
-        mShapeRectangleHeight = attributes.getInteger(R.styleable.WaveLoadingView_wlv_rectangle_height, DEFAULT_RECTANGLE_HEIGHT);
 
         // Init RoundRectangle
         mIsRoundRectangle = attributes.getBoolean(R.styleable.WaveLoadingView_wlv_round_rectangle, false);
@@ -259,14 +253,19 @@ public class WaveLoadingView extends View {
                 // Draw rectangle
                 case 3:
                     if (mIsRoundRectangle) {
-                        // Currently does not support the border settings
-                        RectF rect = new RectF((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
-                                    getHeight());
-                        canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
+                        if (borderWidth > 0) {
+                            RectF rect = new RectF(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f);
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
+                        } else {
+                            RectF rect = new RectF(0, 0, getWidth(), getHeight());
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
+                        }
                     }else {
-                        // Currently does not support the border settings
-                        canvas.drawRect((getWidth() - mShapeRectangleWidth) / 2, getHeight() - mShapeRectangleHeight, mShapeRectangleWidth + (getWidth() - mShapeRectangleWidth) / 2,
-                                    getHeight(),  mWavePaint);
+                        if (borderWidth > 0) {
+                            canvas.drawRect(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f, mWavePaint);
+                        } else {
+                            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mWavePaint);
+                        }
                     }
                     break;
                 default:
@@ -300,9 +299,15 @@ public class WaveLoadingView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mCanvasSize = w;
-        if (h < mCanvasSize)
-            mCanvasSize = h;
+        // If shapType is rectangle
+        if (getShapeType() == 3) {
+            mCanvasWidth = w;
+            mCanvasHeight = h;
+        } else {
+            mCanvasSize = w;
+            if (h < mCanvasSize)
+                mCanvasSize = h;
+        }
         updateWaveShader();
     }
 
@@ -364,8 +369,14 @@ public class WaveLoadingView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = measureWidth(widthMeasureSpec);
         int height = measureHeight(heightMeasureSpec);
-        int imageSize = (width < height) ? width : height;
-        setMeasuredDimension(imageSize, imageSize);
+        // If shapType is rectangle
+        if (getShapeType() == 3) {
+            setMeasuredDimension(width, height);
+        } else {
+            int imageSize = (width < height) ? width : height;
+            setMeasuredDimension(imageSize, imageSize);
+        }
+
     }
 
     private int measureWidth(int measureSpec) {
@@ -381,7 +392,7 @@ public class WaveLoadingView extends View {
             result = specSize;
         } else {
             // The parent has not imposed any constraint on the child.
-            result = mCanvasSize;
+            result = mCanvasWidth;
         }
         return result;
     }
@@ -399,7 +410,7 @@ public class WaveLoadingView extends View {
             result = specSize;
         } else {
             // Measure the text (beware: ascent is a negative number).
-            result = mCanvasSize;
+            result = mCanvasHeight;
         }
         return (result + 2);
     }
