@@ -30,6 +30,12 @@
         <attr name="wlv_titleTopColor" format="color"/>
         <attr name="wlv_titleCenterColor" format="color"/>
         <attr name="wlv_titleBottomColor" format="color"/>
+        <attr name="wlv_titleTopStrokeColor" format="color"/>
+        <attr name="wlv_titleTopStrokeWidth" format="dimension"/>
+        <attr name="wlv_titleBottomStrokeColor" format="color"/>
+        <attr name="wlv_titleBottomStrokeWidth" format="dimension"/>
+        <attr name="wlv_titleCenterStrokeColor" format="color"/>
+        <attr name="wlv_titleCenterStrokeWidth" format="dimension"/>
     </declare-styleable>
 
 </resources>
