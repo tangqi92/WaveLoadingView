@@ -47,7 +47,9 @@ public class WaveLoadingView extends View {
     private static final int DEFAULT_WAVE_PROGRESS_VALUE = 50;
     private static final int DEFAULT_WAVE_COLOR = Color.parseColor("#212121");
     private static final int DEFAULT_TITLE_COLOR = Color.parseColor("#212121");
+    private static final int DEFAULT_STROKE_COLOR = Color.TRANSPARENT;
     private static final float DEFAULT_BORDER_WIDTH = 0;
+    private static final float DEFAULT_TITLE_STROKE_WIDTH = 0;
     // This is incorrect/not recommended by Joshua Bloch in his book Effective Java (2nd ed).
     private static final int DEFAULT_WAVE_SHAPE = ShapeType.CIRCLE.ordinal();
     private static final int DEFAULT_TRIANGLE_DIRECTION = TriangleDirection.NORTH.ordinal();
@@ -104,6 +106,10 @@ public class WaveLoadingView extends View {
     private Paint mTopTitlePaint;
     private Paint mBottomTitlePaint;
     private Paint mCenterTitlePaint;
+
+    private Paint mTopTitleStrokePaint;
+    private Paint mBottomTitleStrokePaint;
+    private Paint mCenterTitleStrokePaint;
 
     // Animation.
     private AnimatorSet mAnimatorSet;
@@ -167,27 +173,54 @@ public class WaveLoadingView extends View {
         mBorderPaint.setStrokeWidth(attributes.getDimension(R.styleable.WaveLoadingView_wlv_borderWidth, dp2px(DEFAULT_BORDER_WIDTH)));
         mBorderPaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_borderColor, DEFAULT_WAVE_COLOR));
 
-        // Init Title
+        // Init Top Title
         mTopTitlePaint = new Paint();
         mTopTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleTopColor, DEFAULT_TITLE_COLOR));
         mTopTitlePaint.setStyle(Paint.Style.FILL);
         mTopTitlePaint.setAntiAlias(true);
         mTopTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleTopSize, sp2px(DEFAULT_TITLE_TOP_SIZE)));
+
+        mTopTitleStrokePaint = new Paint();
+        mTopTitleStrokePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleTopStrokeColor, DEFAULT_STROKE_COLOR));
+        mTopTitleStrokePaint.setStrokeWidth(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleTopStrokeWidth, dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
+        mTopTitleStrokePaint.setStyle(Paint.Style.STROKE);
+        mTopTitleStrokePaint.setAntiAlias(true);
+        mTopTitleStrokePaint.setTextSize(mTopTitlePaint.getTextSize());
+
         mTopTitle = attributes.getString(R.styleable.WaveLoadingView_wlv_titleTop);
 
+        // Init Center Title
         mCenterTitlePaint = new Paint();
         mCenterTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleCenterColor, DEFAULT_TITLE_COLOR));
         mCenterTitlePaint.setStyle(Paint.Style.FILL);
         mCenterTitlePaint.setAntiAlias(true);
         mCenterTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleCenterSize, sp2px(DEFAULT_TITLE_CENTER_SIZE)));
+
+        mCenterTitleStrokePaint = new Paint();
+        mCenterTitleStrokePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleCenterStrokeColor, DEFAULT_STROKE_COLOR));
+        mCenterTitleStrokePaint.setStrokeWidth(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleCenterStrokeWidth, dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
+        mCenterTitleStrokePaint.setStyle(Paint.Style.STROKE);
+        mCenterTitleStrokePaint.setAntiAlias(true);
+        mCenterTitleStrokePaint.setTextSize(mCenterTitlePaint.getTextSize());
+
         mCenterTitle = attributes.getString(R.styleable.WaveLoadingView_wlv_titleCenter);
 
+        // Init Bottom Title
         mBottomTitlePaint = new Paint();
         mBottomTitlePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleBottomColor, DEFAULT_TITLE_COLOR));
         mBottomTitlePaint.setStyle(Paint.Style.FILL);
         mBottomTitlePaint.setAntiAlias(true);
         mBottomTitlePaint.setTextSize(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomSize, sp2px(DEFAULT_TITLE_BOTTOM_SIZE)));
+
+        mBottomTitleStrokePaint = new Paint();
+        mBottomTitleStrokePaint.setColor(attributes.getColor(R.styleable.WaveLoadingView_wlv_titleBottomStrokeColor, DEFAULT_STROKE_COLOR));
+        mBottomTitleStrokePaint.setStrokeWidth(attributes.getDimension(R.styleable.WaveLoadingView_wlv_titleBottomStrokeWidth, dp2px(DEFAULT_TITLE_STROKE_WIDTH)));
+        mBottomTitleStrokePaint.setStyle(Paint.Style.STROKE);
+        mBottomTitleStrokePaint.setAntiAlias(true);
+        mBottomTitleStrokePaint.setTextSize(mBottomTitlePaint.getTextSize());
+
         mBottomTitle = attributes.getString(R.styleable.WaveLoadingView_wlv_titleBottom);
+
         attributes.recycle();
     }
 
@@ -275,19 +308,30 @@ public class WaveLoadingView extends View {
             // I know, the code written here is very shit.
             if (!TextUtils.isEmpty(mTopTitle)) {
                 float top = mTopTitlePaint.measureText(mTopTitle);
+                // Draw the stroke of top text
+                canvas.drawText(mTopTitle, (getWidth() - top) / 2,
+                        getHeight() * 2 / 10.0f, mTopTitleStrokePaint);
+                // Draw the top text
                 canvas.drawText(mTopTitle, (getWidth() - top) / 2,
                         getHeight() * 2 / 10.0f, mTopTitlePaint);
             }
 
             if (!TextUtils.isEmpty(mCenterTitle)) {
                 float middle = mCenterTitlePaint.measureText(mCenterTitle);
-                // Draw the text centered.
+                // Draw the stroke of centered text
+                canvas.drawText(mCenterTitle, (getWidth() - middle) / 2,
+                        getHeight() / 2 - ((mCenterTitleStrokePaint.descent() + mCenterTitleStrokePaint.ascent()) / 2), mCenterTitleStrokePaint);
+                // Draw the centered text
                 canvas.drawText(mCenterTitle, (getWidth() - middle) / 2,
                         getHeight() / 2 - ((mCenterTitlePaint.descent() + mCenterTitlePaint.ascent()) / 2), mCenterTitlePaint);
             }
 
             if (!TextUtils.isEmpty(mBottomTitle)) {
                 float bottom = mBottomTitlePaint.measureText(mBottomTitle);
+                // Draw the stroke of bottom text
+                canvas.drawText(mBottomTitle, (getWidth() - bottom) / 2,
+                        getHeight() * 8 / 10.0f - ((mBottomTitleStrokePaint.descent() + mBottomTitleStrokePaint.ascent()) / 2), mBottomTitleStrokePaint);
+                // Draw the bottom text
                 canvas.drawText(mBottomTitle, (getWidth() - bottom) / 2,
                         getHeight() * 8 / 10.0f - ((mBottomTitlePaint.descent() + mBottomTitlePaint.ascent()) / 2), mBottomTitlePaint);
             }
@@ -587,6 +631,30 @@ public class WaveLoadingView extends View {
 
     public float getBottomTitleSize() {
         return mBottomTitlePaint.getTextSize();
+    }
+
+    public void setTopTitleStrokeWidth(float topTitleStrokeWidth) {
+        mTopTitleStrokePaint.setStrokeWidth(dp2px(topTitleStrokeWidth));
+    }
+
+    public void setTopTitleStrokeColor(int topTitleStrokeColor) {
+        mTopTitleStrokePaint.setColor(topTitleStrokeColor);
+    }
+
+    public void setBottomTitleStrokeWidth(float bottomTitleStrokeWidth) {
+        mBottomTitleStrokePaint.setStrokeWidth(dp2px(bottomTitleStrokeWidth));
+    }
+
+    public void setBottomTitleStrokeColor(int bottomTitleStrokeColor) {
+        mBottomTitleStrokePaint.setColor(bottomTitleStrokeColor);
+    }
+
+    public void setCenterTitleStrokeWidth(float centerTitleStrokeWidth) {
+        mCenterTitleStrokePaint.setStrokeWidth(dp2px(centerTitleStrokeWidth));
+    }
+
+    public void setCenterTitleStrokeColor(int centerTitleStrokeColor) {
+        mCenterTitleStrokePaint.setColor(centerTitleStrokeColor);
     }
 
     private void startAnimation() {
