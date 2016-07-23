@@ -21,9 +21,9 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.3.0'
-    // I have uploaded v0.3.0 on 2016-06-07, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.2.3. 
+    compile 'me.itangqi.waveloadingview:library:0.3.1'
+    // I have uploaded v0.3.1 on 2016-07-23, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.3.0. 
 }
 ```	
 Or
@@ -45,8 +45,10 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
     app:wlv_shapeType="circle"
     app:wlv_round_rectangle="true"
     app:wlv_triangle_direction="north"
+    app:wlv_titleCenterStrokeColor="@android:color/holo_blue_dark"
+    app:wlv_titleCenterStrokeWidth="3dp"
     app:wlv_titleCenter="Center Title"
-    app:wlv_titleCenterColor="@color/colorPrimaryText"
+    app:wlv_titleCenterColor="@android:color/white"
     app:wlv_titleCenterSize="24sp"
     app:wlv_waveAmplitude="70"
     app:wlv_waveColor="@color/colorAccent"/>   
@@ -58,16 +60,18 @@ You can write some animation codes to the callbacks such as setOnCheckedChangeLi
 
 
 ```java
-WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadingView);
-	mWaveLoadingView.setShapeType(WaveLoadingView.ShapeType.CIRCLE);
-	mWaveLoadingView.setTopTitle("Top Title");
-	mWaveLoadingView.setCenterTitleColor(Color.GRAY);
-	mWaveLoadingView.setBottomTitleSize(18);
-	mWaveLoadingView.setProgressValue(80);
-	mWaveLoadingView.setBorderWidth(10);
-	mWaveLoadingView.setAmplitudeRatio(60);
-	mWaveLoadingView.setWaveColor(Color.GRAY);
-	mWaveLoadingView.setBorderColor(Color.GRAY);
+    WaveLoadingView mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadingView);
+    mWaveLoadingView.setShapeType(WaveLoadingView.ShapeType.CIRCLE);
+    mWaveLoadingView.setTopTitle("Top Title");
+    mWaveLoadingView.setCenterTitleColor(Color.GRAY);
+    mWaveLoadingView.setBottomTitleSize(18);
+    mWaveLoadingView.setProgressValue(80);
+    mWaveLoadingView.setBorderWidth(10);
+    mWaveLoadingView.setAmplitudeRatio(60);
+    mWaveLoadingView.setWaveColor(Color.GRAY);
+    mWaveLoadingView.setBorderColor(Color.GRAY);
+    mWaveLoadingView.setTopTitleStrokeColor(Color.BLUE);
+    mWaveLoadingView.setTopTitleStrokeWidth(3);
 ```
 
 ## Customization
@@ -93,13 +97,25 @@ Please feel free to :)
 | wlv_titleBottomSize | dimension | Bottom size, default is 18
 | wlv_titleTopColor | color | Top title color
 | wlv_titleCenterColor | color | Center title color 
-| wlv_titleBottomColor | color | Bottom title color 
+| wlv_titleBottomColor | color | Bottom title color
+| wlv_titleTopStrokeColor | color | Top title stroke color 
+| wlv_titleCenterStrokeColor | color | Center title stroke color 
+| wlv_titleBottomStrokeColor | color | Bottom title stroke color
+| wlv_titleTopStrokeWidth | dimension | Top title stroke width 
+| wlv_titleCenterStrokeWidth | dimension | Center title stroke width 
+| wlv_titleBottomStrokeWidth | dimension | Bottom title stroke width  
 
 
 **All attributes have their respective getters and setters to change them at runtime.**
 
 
 ## Change Log
+
+### 0.3.1（2016-07-23）
+
+#### Update:
+
+- Added stroke feature to all titles. Strokes are disabled by default. [by shayanzoro](https://github.com/shayanzoro)
 
 ### 0.3.0 (2016-06-07)
 
