@@ -267,6 +267,7 @@ public class WaveLoadingView extends View {
                     // Currently does not support the border settings
                     Point start = new Point(0, getHeight());
                     Path triangle = getEquilateralTriangle(start, getWidth(), getHeight(), mTriangleDirection);
+                    canvas.drawPath(triangle, mWaveBgPaint);
                     canvas.drawPath(triangle, mWavePaint);
                     break;
                 // Draw circle
@@ -291,6 +292,9 @@ public class WaveLoadingView extends View {
                                 getHeight() - borderWidth / 2f - 0.5f,
                                 mBorderPaint);
                     }
+
+                    canvas.drawRect(borderWidth, borderWidth, getWidth() - borderWidth,
+                            getHeight() - borderWidth, mWaveBgPaint);
                     canvas.drawRect(borderWidth, borderWidth, getWidth() - borderWidth,
                             getHeight() - borderWidth, mWavePaint);
                     break;
@@ -299,15 +303,19 @@ public class WaveLoadingView extends View {
                     if (mIsRoundRectangle) {
                         if (borderWidth > 0) {
                             RectF rect = new RectF(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f);
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWaveBgPaint);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWavePaint);
                         } else {
                             RectF rect = new RectF(0, 0, getWidth(), getHeight());
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWaveBgPaint);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWavePaint);
                         }
                     } else {
                         if (borderWidth > 0) {
+                            canvas.drawRect(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f, mWaveBgPaint);
                             canvas.drawRect(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f, mWavePaint);
                         } else {
+                            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mWaveBgPaint);
                             canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mWavePaint);
                         }
                     }
