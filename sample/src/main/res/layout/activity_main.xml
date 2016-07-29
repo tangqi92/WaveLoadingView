@@ -21,6 +21,7 @@
             app:wlv_borderWidth="3dp"
             app:wlv_progressValue="40"
             app:wlv_shapeType="circle"
+            app:wlv_wave_background_Color="@android:color/holo_blue_light"
             app:wlv_round_rectangle="true"
             app:wlv_triangle_direction="north"
             app:wlv_titleCenter="Center Title"

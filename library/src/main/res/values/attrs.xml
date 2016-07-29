@@ -20,6 +20,7 @@
         <attr name="wlv_round_rectangle" format="boolean"/>
         <attr name="wlv_round_rectangle_x_and_y" format="integer"/>
         <attr name="wlv_waveColor" format="color"/>
+        <attr name="wlv_wave_background_Color" format="color"/>
         <attr name="wlv_waveAmplitude" format="float"/>
         <attr name="wlv_titleTop" format="string"/>
         <attr name="wlv_titleCenter" format="string"/>
