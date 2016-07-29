@@ -46,6 +46,7 @@ public class WaveLoadingView extends View {
     private static final float DEFAULT_WAVE_SHIFT_RATIO = 0.0f;
     private static final int DEFAULT_WAVE_PROGRESS_VALUE = 50;
     private static final int DEFAULT_WAVE_COLOR = Color.parseColor("#212121");
+    private static final int DEFAULT_WAVE_BACKGROUND_COLOR = Color.parseColor("#00000000");
     private static final int DEFAULT_TITLE_COLOR = Color.parseColor("#212121");
     private static final int DEFAULT_STROKE_COLOR = Color.TRANSPARENT;
     private static final float DEFAULT_BORDER_WIDTH = 0;
@@ -77,6 +78,7 @@ public class WaveLoadingView extends View {
     private int mCanvasHeight;
     private int mCanvasWidth;
     private float mAmplitudeRatio;
+    private int mWaveBgColor;
     private int mWaveColor;
     private int mShapeType;
     private int mTriangleDirection;
@@ -100,6 +102,8 @@ public class WaveLoadingView extends View {
     private Matrix mShaderMatrix;
     // Paint to draw wave.
     private Paint mWavePaint;
+    //Paint to draw waveBackground.
+    private Paint mWaveBgPaint;
     // Paint to draw border.
     private Paint mBorderPaint;
     // Point to draw title.
@@ -138,7 +142,8 @@ public class WaveLoadingView extends View {
         // The ANTI_ALIAS_FLAG bit AntiAliasing smooths out the edges of what is being drawn,
         // but is has no impact on the interior of the shape.
         mWavePaint.setAntiAlias(true);
-
+        mWaveBgPaint = new Paint();
+        mWaveBgPaint.setAntiAlias(true);
         // Init Animation
         initAnimation();
 
@@ -150,6 +155,9 @@ public class WaveLoadingView extends View {
 
         // Init Wave
         mWaveColor = attributes.getColor(R.styleable.WaveLoadingView_wlv_waveColor, DEFAULT_WAVE_COLOR);
+        mWaveBgColor = attributes.getColor(R.styleable.WaveLoadingView_wlv_wave_background_Color, DEFAULT_WAVE_BACKGROUND_COLOR);
+
+        mWaveBgPaint.setColor(mWaveBgColor);
 
         // Init AmplitudeRatio
         float amplitudeRatioAttr = attributes.getFloat(R.styleable.WaveLoadingView_wlv_waveAmplitude, DEFAULT_AMPLITUDE_VALUE) / 1000;
@@ -259,6 +267,7 @@ public class WaveLoadingView extends View {
                     // Currently does not support the border settings
                     Point start = new Point(0, getHeight());
                     Path triangle = getEquilateralTriangle(start, getWidth(), getHeight(), mTriangleDirection);
+                    canvas.drawPath(triangle, mWaveBgPaint);
                     canvas.drawPath(triangle, mWavePaint);
                     break;
                 // Draw circle
@@ -267,7 +276,10 @@ public class WaveLoadingView extends View {
                         canvas.drawCircle(getWidth() / 2f, getHeight() / 2f,
                                 (getWidth() - borderWidth) / 2f - 1f, mBorderPaint);
                     }
+
                     float radius = getWidth() / 2f - borderWidth;
+                    // Draw background
+                    canvas.drawCircle(getWidth() / 2f, getHeight() / 2f, radius, mWaveBgPaint);
                     canvas.drawCircle(getWidth() / 2f, getHeight() / 2f, radius, mWavePaint);
                     break;
                 // Draw square
@@ -280,6 +292,9 @@ public class WaveLoadingView extends View {
                                 getHeight() - borderWidth / 2f - 0.5f,
                                 mBorderPaint);
                     }
+
+                    canvas.drawRect(borderWidth, borderWidth, getWidth() - borderWidth,
+                            getHeight() - borderWidth, mWaveBgPaint);
                     canvas.drawRect(borderWidth, borderWidth, getWidth() - borderWidth,
                             getHeight() - borderWidth, mWavePaint);
                     break;
@@ -288,15 +303,19 @@ public class WaveLoadingView extends View {
                     if (mIsRoundRectangle) {
                         if (borderWidth > 0) {
                             RectF rect = new RectF(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f);
-                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWaveBgPaint);
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWavePaint);
                         } else {
                             RectF rect = new RectF(0, 0, getWidth(), getHeight());
-                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY,  mWavePaint);
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWaveBgPaint);
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWavePaint);
                         }
-                    }else {
+                    } else {
                         if (borderWidth > 0) {
+                            canvas.drawRect(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f, mWaveBgPaint);
                             canvas.drawRect(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f, mWavePaint);
                         } else {
+                            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mWaveBgPaint);
                             canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mWavePaint);
                         }
                     }
@@ -359,11 +378,11 @@ public class WaveLoadingView extends View {
         // IllegalArgumentException: width and height must be > 0 while loading Bitmap from View
         // http://stackoverflow.com/questions/17605662/illegalargumentexception-width-and-height-must-be-0-while-loading-bitmap-from
         if (bitmapBuffer == null || haveBoundsChanged()) {
-            if(bitmapBuffer != null)
+            if (bitmapBuffer != null)
                 bitmapBuffer.recycle();
             int width = getMeasuredWidth();
             int height = getMeasuredHeight();
-            if(width > 0 && height > 0) {
+            if (width > 0 && height > 0) {
                 double defaultAngularFrequency = 2.0f * Math.PI / DEFAULT_WAVE_LENGTH_RATIO / width;
                 float defaultAmplitude = height * DEFAULT_AMPLITUDE_RATIO;
                 mDefaultWaterLevel = height * DEFAULT_WATER_LEVEL_RATIO;
@@ -457,6 +476,15 @@ public class WaveLoadingView extends View {
             result = mCanvasHeight;
         }
         return (result + 2);
+    }
+
+
+    public void setWaveBgColor(int color) {
+        this.mWaveBgColor = color;
+    }
+
+    public int getWaveBgColor() {
+        return mWaveBgColor;
     }
 
     public void setWaveColor(int color) {
@@ -726,9 +754,10 @@ public class WaveLoadingView extends View {
 
     /**
      * Draw EquilateralTriangle
-     * @param p1 Start point
-     * @param width The width of triangle
-     * @param height The height of triangle
+     *
+     * @param p1        Start point
+     * @param width     The width of triangle
+     * @param height    The height of triangle
      * @param direction The direction of triangle
      * @return Path
      */
