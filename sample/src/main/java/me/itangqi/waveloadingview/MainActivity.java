@@ -157,6 +157,18 @@ public class MainActivity extends AppCompatActivity {
             public void onColorSelected(@ColorInt int color) {
             }
         });
+        //Wave Background Color
+        ((LobsterShadeSlider) findViewById(R.id.shadeslider_wave_background_color)).addOnColorListener(new OnColorListener() {
+            @Override
+            public void onColorChanged(@ColorInt int color) {
+                mWaveLoadingView.setWaveBgColor(color);
+            }
+
+            @Override
+            public void onColorSelected(@ColorInt int color) {
+            }
+        });
+
 
         // Border Color
         ((LobsterShadeSlider) findViewById(R.id.shadeslider_border_color)).addOnColorListener(new OnColorListener() {

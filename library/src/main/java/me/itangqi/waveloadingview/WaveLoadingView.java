@@ -481,6 +481,9 @@ public class WaveLoadingView extends View {
 
     public void setWaveBgColor(int color) {
         this.mWaveBgColor = color;
+        mWaveBgPaint.setColor(this.mWaveBgColor);
+        updateWaveShader();
+        invalidate();
     }
 
     public int getWaveBgColor() {

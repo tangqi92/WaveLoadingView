@@ -21,7 +21,6 @@
             app:wlv_borderWidth="3dp"
             app:wlv_progressValue="40"
             app:wlv_shapeType="circle"
-            app:wlv_wave_background_Color="@android:color/holo_blue_light"
             app:wlv_round_rectangle="true"
             app:wlv_triangle_direction="north"
             app:wlv_titleCenter="Center Title"
@@ -197,10 +196,29 @@
                     android:layout_toRightOf="@id/tv_wave_color"/>
 
                 <TextView
-                    android:id="@+id/tv_border_color"
+                    android:id="@+id/tv_wave_background_color"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:layout_below="@+id/tv_wave_color"
+                    android:gravity="center_vertical"
+                    android:text="Background Color:"
+                    android:textColor="@color/colorPrimaryText"/>
+
+                <com.larswerkman.lobsterpicker.sliders.LobsterShadeSlider
+                    android:id="@+id/shadeslider_wave_background_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_wave_background_color"
+                    android:layout_below="@+id/shadeslider_wave_color"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/tv_wave_background_color"/>
+
+
+                <TextView
+                    android:id="@+id/tv_border_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_below="@+id/tv_wave_background_color"
                     android:gravity="center_vertical"
                     android:text="Board Color:"
                     android:textColor="@color/colorPrimaryText"/>
@@ -210,7 +228,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/tv_border_color"
-                    android:layout_below="@+id/shadeslider_wave_color"
+                    android:layout_below="@+id/shadeslider_wave_background_color"
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/tv_border_color"/>
 
