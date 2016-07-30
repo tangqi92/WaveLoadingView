@@ -21,9 +21,9 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.3.1'
-    // I have uploaded v0.3.1 on 2016-07-23, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.3.0. 
+    compile 'me.itangqi.waveloadingview:library:0.3.2'
+    // I have uploaded v0.3.2 on 2016-07-30, if it doesn't take effect or your 
+    // gradle cannot find it in maven central, you may try v0.3.1. 
 }
 ```	
 Or
@@ -88,6 +88,7 @@ Please feel free to :)
 | wlv_round_rectangle | boolean | Is round rectangle, default is false
 | wlv_round_rectangle_x_and_y | integer | Round Rectangle corners, default is 30
 | wlv_waveColor | color | Wave color
+| wlv_wave_background_Color | color | Wave background color
 | wlv_waveAmplitude | float | Wave amplitude
 | wlv_titleTop | string | Top title content, default is null
 | wlv_titleCenter | string | Center title content, default is null
@@ -110,6 +111,13 @@ Please feel free to :)
 
 
 ## Change Log
+
+
+### 0.3.1（2016-07-29）
+
+#### Update:
+
+- Support change the background of waveview [#18](https://github.com/tangqi92/WaveLoadingView/issues/18). [by GreatGarlic](https://github.com/GreatGarlic)
 
 ### 0.3.1（2016-07-23）
 
