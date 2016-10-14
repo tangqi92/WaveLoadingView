@@ -3,16 +3,16 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 // This is the library version used when deploying the artifact.
-version = "0.3.2"
+version = "0.3.3"
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 24
+    buildToolsVersion '24.0.0'
     resourcePrefix "waveloadingview"
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 23
-        versionCode 3
+        targetSdkVersion 24
+        versionCode 4
         versionName "3.0"
     }
     buildTypes {
@@ -25,12 +25,14 @@ android {
     lintOptions {
         abortOnError false
     }
+    productFlavors {
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.1'
 }
 
 def siteUrl = 'https://github.com/tangqi92/WaveLoadingView'
