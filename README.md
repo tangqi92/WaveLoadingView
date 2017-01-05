@@ -21,9 +21,9 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-    compile 'me.itangqi.waveloadingview:library:0.3.2'
-    // I have uploaded v0.3.2 on 2016-07-30, if it doesn't take effect or your 
-    // gradle cannot find it in maven central, you may try v0.3.1. 
+    compile 'me.itangqi.waveloadingview:library:0.3.4'
+    // I have uploaded v0.3.4 on 2017-01-05, if it doesn't take effect or your
+    // gradle cannot find it in maven central, you may try v0.3.2.
 }
 ```	
 Or
@@ -72,6 +72,10 @@ You can write some animation codes to the callbacks such as setOnCheckedChangeLi
     mWaveLoadingView.setBorderColor(Color.GRAY);
     mWaveLoadingView.setTopTitleStrokeColor(Color.BLUE);
     mWaveLoadingView.setTopTitleStrokeWidth(3);
+    mWaveLoadingView.pauseAnimation();
+    mWaveLoadingView.resumeAnimation();
+    mWaveLoadingView.cancelAnimation();
+    mWaveLoadingView.startAnimation();
 ```
 
 ## Customization
@@ -112,8 +116,20 @@ Please feel free to :)
 
 ## Change Log
 
+### 0.3.4（2016-01-05）
 
-### 0.3.1（2016-07-29）
+#### Update:
+
+- Support pause/resume wave. [#28](https://github.com/tangqi92/WaveLoadingView/issues/28) / [#26](https://github.com/tangqi92/WaveLoadingView/issues/26)
+
+#### Plan:
+
+- Support change the frequency of the waves
+
+
+### 0.3.3（2016-10-14）
+
+### 0.3.2（2016-07-29）
 
 #### Update:
 
