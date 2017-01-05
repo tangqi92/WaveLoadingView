@@ -116,7 +116,7 @@ Please feel free to :)
 
 ## Change Log
 
-### 0.3.4（2016-01-05）
+### 0.3.4（2017-01-05）
 
 #### Update:
 
