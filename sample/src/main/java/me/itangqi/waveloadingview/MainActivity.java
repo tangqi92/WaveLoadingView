@@ -62,6 +62,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Animator
+        ((CheckBox) findViewById(R.id.cb_animator_cancel_and_start)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    mWaveLoadingView.cancelAnimation();
+                } else {
+                    mWaveLoadingView.startAnimation();
+                }
+            }
+        });
+
+        ((CheckBox) findViewById(R.id.cb_animator_pause_and_resume)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    mWaveLoadingView.pauseAnimation();
+                } else {
+                    mWaveLoadingView.resumeAnimation();
+                }
+            }
+        });
+
         // Top Title
         ((CheckBox) findViewById(R.id.cb_title_top)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -168,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
             public void onColorSelected(@ColorInt int color) {
             }
         });
-
 
         // Border Color
         ((LobsterShadeSlider) findViewById(R.id.shadeslider_border_color)).addOnColorListener(new OnColorListener() {

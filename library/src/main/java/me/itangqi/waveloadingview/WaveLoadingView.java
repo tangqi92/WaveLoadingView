@@ -3,6 +3,7 @@ package me.itangqi.waveloadingview;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -688,9 +690,41 @@ public class WaveLoadingView extends View {
         mCenterTitleStrokePaint.setColor(centerTitleStrokeColor);
     }
 
-    private void startAnimation() {
+    public void startAnimation() {
         if (mAnimatorSet != null) {
             mAnimatorSet.start();
+        }
+    }
+
+    public void endAnimation() {
+        if (mAnimatorSet != null) {
+            mAnimatorSet.end();
+        }
+    }
+
+    public void cancelAnimation() {
+        if (mAnimatorSet != null) {
+            mAnimatorSet.cancel();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    @SuppressWarnings("deprecation")
+    public void pauseAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (mAnimatorSet != null) {
+                mAnimatorSet.pause();
+            }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    @SuppressWarnings("deprecation")
+    public void resumeAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (mAnimatorSet != null) {
+                mAnimatorSet.resume();
+            }
         }
     }
 
@@ -705,12 +739,6 @@ public class WaveLoadingView extends View {
         mAnimatorSet.play(waveShiftAnim);
     }
 
-    private void cancel() {
-        if (mAnimatorSet != null) {
-            mAnimatorSet.end();
-        }
-    }
-
     @Override
     protected void onAttachedToWindow() {
         startAnimation();
@@ -719,7 +747,7 @@ public class WaveLoadingView extends View {
 
     @Override
     protected void onDetachedFromWindow() {
-        cancel();
+        cancelAnimation();
         super.onDetachedFromWindow();
     }
 

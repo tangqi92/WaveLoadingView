@@ -3,16 +3,16 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 // This is the library version used when deploying the artifact.
-version = "0.3.3"
+version = "0.3.4"
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '24.0.0'
+    buildToolsVersion '24.0.2'
     resourcePrefix "waveloadingview"
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 4
+        versionCode 6
         versionName "3.0"
     }
     buildTypes {
