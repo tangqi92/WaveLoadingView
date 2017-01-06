@@ -118,6 +118,7 @@ public class WaveLoadingView extends View {
     private Paint mCenterTitleStrokePaint;
 
     // Animation.
+    private ObjectAnimator waveShiftAnim;
     private AnimatorSet mAnimatorSet;
 
     private Context mContext;
@@ -728,13 +729,21 @@ public class WaveLoadingView extends View {
         }
     }
 
+    /**
+     * Sets the length of the animation. The default duration is 1000 milliseconds.
+     *
+     * @param duration The length of the animation, in milliseconds.
+     */
+    public void setAnimDuration(long duration) {
+        waveShiftAnim.setDuration(duration);
+    }
+
     private void initAnimation() {
         // Wave waves infinitely.
-        ObjectAnimator waveShiftAnim = ObjectAnimator.ofFloat(this, "waveShiftRatio", 0f, 1f);
+        waveShiftAnim = ObjectAnimator.ofFloat(this, "waveShiftRatio", 0f, 1f);
         waveShiftAnim.setRepeatCount(ValueAnimator.INFINITE);
         waveShiftAnim.setDuration(1000);
         waveShiftAnim.setInterpolator(new LinearInterpolator());
-
         mAnimatorSet = new AnimatorSet();
         mAnimatorSet.play(waveShiftAnim);
     }
