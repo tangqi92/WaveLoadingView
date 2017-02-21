@@ -561,6 +561,8 @@ public class WaveLoadingView extends View {
         waterLevelAnim.setInterpolator(new DecelerateInterpolator());
         AnimatorSet animatorSetProgress = new AnimatorSet();
         animatorSetProgress.play(waterLevelAnim);
+        if(isInEditMode())
+            return;
         animatorSetProgress.start();
     }
 
@@ -692,7 +694,7 @@ public class WaveLoadingView extends View {
     }
 
     public void startAnimation() {
-        if (mAnimatorSet != null) {
+        if (mAnimatorSet != null&&!isInEditMode()) {
             mAnimatorSet.start();
         }
     }
