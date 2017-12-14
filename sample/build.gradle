@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "me.itangqi.waveloadingview"
         minSdkVersion 14
-        targetSdkVersion 24
+        targetSdkVersion 26
         versionCode 7
         versionName '3.0'
     }
@@ -26,5 +26,5 @@ dependencies {
     compile 'com.larswerkman:lobsterpicker:1.0.0'
     compile 'org.adw.library:discrete-seekbar:1.0.0'
     compile project(path: ':library')
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
 }
