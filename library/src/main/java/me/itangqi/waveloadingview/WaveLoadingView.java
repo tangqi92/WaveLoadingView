@@ -306,6 +306,7 @@ public class WaveLoadingView extends View {
                     if (mIsRoundRectangle) {
                         if (borderWidth > 0) {
                             RectF rect = new RectF(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f);
+                            canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mBorderPaint);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWaveBgPaint);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWavePaint);
                         } else {
