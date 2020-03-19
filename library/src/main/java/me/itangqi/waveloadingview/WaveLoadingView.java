@@ -65,7 +65,8 @@ public class WaveLoadingView extends View {
         TRIANGLE,
         CIRCLE,
         SQUARE,
-        RECTANGLE
+        RECTANGLE,
+        GLASS
     }
 
     public enum TriangleDirection {
@@ -313,6 +314,26 @@ public class WaveLoadingView extends View {
                             RectF rect = new RectF(0, 0, getWidth(), getHeight());
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWaveBgPaint);
                             canvas.drawRoundRect(rect, mRoundRectangleXY, mRoundRectangleXY, mWavePaint);
+                        }
+                    } else {
+                        if (borderWidth > 0) {
+                            canvas.drawRect(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f, mWaveBgPaint);
+                            canvas.drawRect(borderWidth / 2f, borderWidth / 2f, getWidth() - borderWidth / 2f - 0.5f, getHeight() - borderWidth / 2f - 0.5f, mWavePaint);
+                        } else {
+                            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mWaveBgPaint);
+                            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mWavePaint);
+                        }
+                    }
+                    break;
+                case 4:
+                    if (mIsRoundRectangle) {
+                        if (borderWidth > 0) {
+                            canvas.drawPath(roundedRect(borderWidth / 2f,0,getWidth() - borderWidth / 2f - 0.5f,getHeight() - borderWidth / 2f - 0.5f,mRoundRectangleXY,mRoundRectangleXY,false,false,true,true), mBorderPaint);
+                            canvas.drawPath(roundedRect(borderWidth + 10,0,getWidth()-(borderWidth + 10),getHeight()-(borderWidth + 10),mRoundRectangleXY,mRoundRectangleXY,false,false,true,true), mWaveBgPaint);
+                            canvas.drawPath(roundedRect(borderWidth + 10,0,getWidth()-(borderWidth + 10),getHeight()-(borderWidth + 10),mRoundRectangleXY,mRoundRectangleXY,false,false,true,true), mWavePaint);
+                        } else {
+                            canvas.drawPath(roundedRect(0,0,getWidth(),getHeight(),mRoundRectangleXY,mRoundRectangleXY,false,false,true,true), mWaveBgPaint);
+                            canvas.drawPath(roundedRect(0,0,getWidth(),getHeight(),mRoundRectangleXY,mRoundRectangleXY,false,false,true,true), mWavePaint);
                         }
                     } else {
                         if (borderWidth > 0) {
@@ -833,6 +854,58 @@ public class WaveLoadingView extends View {
         path.moveTo(p1.x, p1.y);
         path.lineTo(p2.x, p2.y);
         path.lineTo(p3.x, p3.y);
+
+        return path;
+    }
+
+    public static Path roundedRect(
+            float left, float top, float right, float bottom, float rx, float ry,
+            boolean tl, boolean tr, boolean br, boolean bl
+    ){
+        Path path = new Path();
+        if (rx < 0) rx = 0;
+        if (ry < 0) ry = 0;
+        float width = right - left;
+        float height = bottom - top;
+        if (rx > width / 2) rx = width / 2;
+        if (ry > height / 2) ry = height / 2;
+        float widthMinusCorners = (width - (2 * rx));
+        float heightMinusCorners = (height - (2 * ry));
+
+        path.moveTo(right, top + ry);
+        if (tr)
+            path.rQuadTo(0, -ry, -rx, -ry);//top-right corner
+        else{
+            path.rLineTo(0, -ry);
+            path.rLineTo(-rx,0);
+        }
+        path.rLineTo(-widthMinusCorners, 0);
+        if (tl)
+            path.rQuadTo(-rx, 0, -rx, ry); //top-left corner
+        else{
+            path.rLineTo(-rx, 0);
+            path.rLineTo(0,ry);
+        }
+        path.rLineTo(0, heightMinusCorners);
+
+        if (bl)
+            path.rQuadTo(0, ry, rx, ry);//bottom-left corner
+        else{
+            path.rLineTo(0, ry);
+            path.rLineTo(rx,0);
+        }
+
+        path.rLineTo(widthMinusCorners, 0);
+        if (br)
+            path.rQuadTo(rx, 0, rx, -ry); //bottom-right corner
+        else{
+            path.rLineTo(rx,0);
+            path.rLineTo(0, -ry);
+        }
+
+        path.rLineTo(0, -heightMinusCorners);
+
+        path.close();//Given close, last lineto can be removed.
 
         return path;
     }
