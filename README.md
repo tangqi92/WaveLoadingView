@@ -37,8 +37,8 @@ Include the WaveLoadingView widget in your layout. And you can customize it like
 ```xml
 <me.itangqi.waveloadingview.WaveLoadingView
     android:id="@+id/waveLoadingView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
     app:wlv_borderColor="@color/colorAccent"
     app:wlv_borderWidth="3dp"
     app:wlv_progressValue="40"
