@@ -5,9 +5,9 @@
 
 **WaveLoadingView** - An Android library that provides a realistic wave-loading effect.
 
-## Sample
+## Sample Preview
 
-<img src="http://7xikfc.com1.z0.glb.clouddn.com/waveloadingview.png" alt="sample" title="sample" width="400" height="680" />
+<img src="https://github.com/Vishal-beep136/WaveLoadingView/blob/master/screenshots/sample.gif" alt="sample" title="sample" width="400" height="680" />
 
 
 
