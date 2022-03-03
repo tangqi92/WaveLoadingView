@@ -7,7 +7,7 @@
 
 ## Sample Preview
 
-<img src="https://github.com/Vishal-beep136/WaveLoadingView/blob/master/screenshots/sample.gif" alt="sample" title="sample" width="400" height="680" />
+<img src="https://github.com/tangqi92/WaveLoadingView/blob/master/screenshots/sample.gif" alt="sample" title="sample" width="400" height="680" />
 
 
 
