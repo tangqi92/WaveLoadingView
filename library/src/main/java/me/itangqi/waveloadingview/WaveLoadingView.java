@@ -60,6 +60,7 @@ public class WaveLoadingView extends View {
     private static final float DEFAULT_TITLE_TOP_SIZE = 18.0f;
     private static final float DEFAULT_TITLE_CENTER_SIZE = 22.0f;
     private static final float DEFAULT_TITLE_BOTTOM_SIZE = 18.0f;
+    private int progressDuration = 1000;
 
     public enum ShapeType {
         TRIANGLE,
@@ -558,7 +559,7 @@ public class WaveLoadingView extends View {
     public void setProgressValue(int progress) {
         mProgressValue = progress;
         ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(this, "waterLevelRatio", mWaterLevelRatio, ((float) mProgressValue / 100));
-        waterLevelAnim.setDuration(1000);
+        waterLevelAnim.setDuration(progressDuration);
         waterLevelAnim.setInterpolator(new DecelerateInterpolator());
         AnimatorSet animatorSetProgress = new AnimatorSet();
         animatorSetProgress.play(waterLevelAnim);
@@ -835,5 +836,13 @@ public class WaveLoadingView extends View {
         path.lineTo(p3.x, p3.y);
 
         return path;
+    }
+
+    /**
+     * set duration of progress change animation, 1000ms by default
+     * @param progressDuration duration of progress change animation
+     */
+    public void setProgressDuration(int progressDuration) {
+        this.progressDuration = progressDuration;
     }
 }
