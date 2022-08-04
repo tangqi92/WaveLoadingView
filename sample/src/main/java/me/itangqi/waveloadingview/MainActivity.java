@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         mWaveLoadingView = (WaveLoadingView) findViewById(R.id.waveLoadingView);
         // Sets the length of the animation, default is 1000.
         mWaveLoadingView.setAnimDuration(3000);
+        mWaveLoadingView.setProgressDuration(3000);
 
         // Shape Type
         findViewById(R.id.tv_shape).setOnClickListener(new View.OnClickListener() {
